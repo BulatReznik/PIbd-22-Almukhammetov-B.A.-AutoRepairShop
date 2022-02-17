@@ -8,6 +8,8 @@ namespace RepairView
 {
     public partial class FormMain : Form
     {
+        [Dependency]
+        public new IUnityContainer Container { get; set; }
         private readonly IOrderLogic _orderLogic;
         public FormMain(IOrderLogic orderLogic)
         {
@@ -115,6 +117,17 @@ namespace RepairView
         private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+        private void СкладыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWareHouses>();
+            form.ShowDialog();
+        }
+
+        private void ПополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWareHouse>();
+            form.ShowDialog();
         }
     }
 }
