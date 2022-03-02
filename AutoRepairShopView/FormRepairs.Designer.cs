@@ -98,6 +98,7 @@ namespace RepairView
             this.Controls.Add(this.dataGridViewRepairs);
             this.Name = "FormRepairs";
             this.Text = "Ремонты";
+            this.Load += new System.EventHandler(this.FormRepairs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRepairs)).EndInit();
             this.ResumeLayout(false);
 

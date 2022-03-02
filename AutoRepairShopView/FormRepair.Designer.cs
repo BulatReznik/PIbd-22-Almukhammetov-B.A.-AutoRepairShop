@@ -34,6 +34,9 @@ namespace RepairView
             this.ButtonRef = new System.Windows.Forms.Button();
             this.ButtonAdd = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxMaterials = new System.Windows.Forms.GroupBox();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
@@ -41,9 +44,6 @@ namespace RepairView
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBoxMaterials.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +100,22 @@ namespace RepairView
             this.dataGridView.RowTemplate.Height = 25;
             this.dataGridView.Size = new System.Drawing.Size(549, 298);
             this.dataGridView.TabIndex = 8;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Id";
+            this.Column1.Name = "Column1";
+            this.Column1.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Расходник";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Количество";
+            this.Column3.Name = "Column3";
             // 
             // groupBoxMaterials
             // 
@@ -167,22 +183,6 @@ namespace RepairView
             this.label2.TabIndex = 14;
             this.label2.Text = "Цена:";
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Id";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Расходник";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Количество";
-            this.Column3.Name = "Column3";
-            // 
             // FormRepair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -197,7 +197,7 @@ namespace RepairView
             this.Controls.Add(this.groupBoxMaterials);
             this.Name = "FormRepair";
             this.Text = "Ремонт автомобилей";
-            this.Load += new System.EventHandler(this.FormRepair_Load);
+            this.Load += new System.EventHandler(this.ButtonAdd_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBoxMaterials.ResumeLayout(false);
             this.ResumeLayout(false);

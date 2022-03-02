@@ -29,33 +29,7 @@ namespace RepairView
         }
         private void FormRepair_Load(object sender, EventArgs e)
         {
-            if (id.HasValue)
-            {
-                try
-                {
-                    RepairViewModel view = _logic.Read(new RepairBindingModel
-                    {
-                        Id =
-                   id.Value
-                    })?[0];
-                    if (view != null)
-                    {
-                        textBoxNameRepair.Text = view.RepairName;
-                        textBoxPrice.Text = view.Price.ToString();
-                        repairComponents = view.RepairComponents;
-                        LoadData();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                repairComponents = new Dictionary<int, (string, int)>();
-            }
+
         }
         private void LoadData()
         {

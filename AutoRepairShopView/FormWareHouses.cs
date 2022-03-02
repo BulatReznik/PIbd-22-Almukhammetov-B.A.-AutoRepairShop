@@ -18,13 +18,13 @@ namespace RepairView
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly WareHouseLogic logic;
-        public FormWareHouses()
+        private readonly WareHouseLogic _logic;
+        public FormWareHouses(WareHouseLogic logic)
         {
             InitializeComponent();
-            this.logic = logic;
+            _logic = logic;
         }
-        private void FormStores_Load(object sender, EventArgs e)
+        private void FormWareHouses_Load(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -32,7 +32,7 @@ namespace RepairView
 		{
 			try
 			{
-				var list = logic.Read(null);
+				var list = _logic.Read(null);
 				if (list != null)
 				{
 					dataGridView.DataSource = list;
@@ -76,7 +76,7 @@ namespace RepairView
 					int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
 					try
 					{
-						logic.Delete(new WareHouseBindingModel { Id = id });
+						_logic.Delete(new WareHouseBindingModel { Id = id });
 					}
 					catch (Exception ex)
 					{
