@@ -3,10 +3,9 @@ using System.Windows.Forms;
 using RepairContracts.BusinessLogicsContracts;
 using RepairContracts.StorageContracts;
 using RepairBusinessLogic.BusinessLogics;
-using RepairFileImplement.Implements;
+using RepairDatabaseImplement.Implements;
 using Unity;
 using Unity.Lifetime;
-using RepairFileImplement;
 
 namespace RepairView
 {
@@ -35,7 +34,6 @@ namespace RepairView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
-            FileDataListSingleton.SaveMethods();
         }
         private static IUnityContainer BuildUnityContainer()
         {
