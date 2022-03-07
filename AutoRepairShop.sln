@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairListImplement", "Auto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairView", "AutoRepairShopView\RepairView.csproj", "{0B62D2AD-97B0-4A91-903C-A45CDF9DB819}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairFileImplement", "AbstractShopFileImplement\RepairFileImplement.csproj", "{455B5395-F1A9-4810-92D0-361E76D52CC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairFileImplement", "AbstractShopFileImplement\RepairFileImplement.csproj", "{455B5395-F1A9-4810-92D0-361E76D52CC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairDatabaseImplement", "RepairDatabaseImplement\RepairDatabaseImplement.csproj", "{502CD001-F4E5-4CD4-B88A-051F312D8A1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{455B5395-F1A9-4810-92D0-361E76D52CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{455B5395-F1A9-4810-92D0-361E76D52CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{455B5395-F1A9-4810-92D0-361E76D52CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{502CD001-F4E5-4CD4-B88A-051F312D8A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{502CD001-F4E5-4CD4-B88A-051F312D8A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{502CD001-F4E5-4CD4-B88A-051F312D8A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{502CD001-F4E5-4CD4-B88A-051F312D8A1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
