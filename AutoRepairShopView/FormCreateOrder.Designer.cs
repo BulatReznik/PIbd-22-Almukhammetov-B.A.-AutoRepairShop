@@ -37,12 +37,14 @@ namespace RepairView
             this.textBoxSum = new System.Windows.Forms.TextBox();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxClient = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // comboBoxRepair
             // 
             this.comboBoxRepair.FormattingEnabled = true;
-            this.comboBoxRepair.Location = new System.Drawing.Point(171, 44);
+            this.comboBoxRepair.Location = new System.Drawing.Point(171, 68);
             this.comboBoxRepair.Name = "comboBoxRepair";
             this.comboBoxRepair.Size = new System.Drawing.Size(377, 23);
             this.comboBoxRepair.TabIndex = 0;
@@ -51,7 +53,7 @@ namespace RepairView
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 44);
+            this.label1.Location = new System.Drawing.Point(21, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 15);
             this.label1.TabIndex = 1;
@@ -60,7 +62,7 @@ namespace RepairView
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 88);
+            this.label2.Location = new System.Drawing.Point(21, 112);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 15);
             this.label2.TabIndex = 2;
@@ -69,7 +71,7 @@ namespace RepairView
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 134);
+            this.label3.Location = new System.Drawing.Point(21, 158);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 15);
             this.label3.TabIndex = 3;
@@ -77,7 +79,7 @@ namespace RepairView
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Location = new System.Drawing.Point(171, 88);
+            this.textBoxCount.Location = new System.Drawing.Point(171, 112);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(195, 23);
             this.textBoxCount.TabIndex = 4;
@@ -85,14 +87,14 @@ namespace RepairView
             // 
             // textBoxSum
             // 
-            this.textBoxSum.Location = new System.Drawing.Point(171, 134);
+            this.textBoxSum.Location = new System.Drawing.Point(171, 158);
             this.textBoxSum.Name = "textBoxSum";
             this.textBoxSum.Size = new System.Drawing.Size(195, 23);
             this.textBoxSum.TabIndex = 5;
             // 
             // ButtonCancel
             // 
-            this.ButtonCancel.Location = new System.Drawing.Point(463, 179);
+            this.ButtonCancel.Location = new System.Drawing.Point(465, 216);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(85, 29);
             this.ButtonCancel.TabIndex = 12;
@@ -102,7 +104,7 @@ namespace RepairView
             // 
             // ButtonSave
             // 
-            this.ButtonSave.Location = new System.Drawing.Point(376, 179);
+            this.ButtonSave.Location = new System.Drawing.Point(378, 216);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(81, 29);
             this.ButtonSave.TabIndex = 13;
@@ -110,11 +112,30 @@ namespace RepairView
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(21, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 15);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Клиент:";
+            // 
+            // comboBoxClient
+            // 
+            this.comboBoxClient.FormattingEnabled = true;
+            this.comboBoxClient.Location = new System.Drawing.Point(171, 21);
+            this.comboBoxClient.Name = "comboBoxClient";
+            this.comboBoxClient.Size = new System.Drawing.Size(377, 23);
+            this.comboBoxClient.TabIndex = 15;
+            // 
             // FormCreateOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 220);
+            this.ClientSize = new System.Drawing.Size(560, 257);
+            this.Controls.Add(this.comboBoxClient);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.textBoxSum);
@@ -141,5 +162,7 @@ namespace RepairView
         private System.Windows.Forms.TextBox textBoxSum;
         private System.Windows.Forms.Button ButtonCancel;
         private System.Windows.Forms.Button ButtonSave;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBoxClient;
     }
 }

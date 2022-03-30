@@ -33,7 +33,9 @@ namespace RepairListImplement.Implements
             var result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.Id == model.Id || order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo )
+                if (order.RepairId == model.RepairId || (model.DateFrom.HasValue && model.DateTo.HasValue &&
+                    order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                    || model.ClientId.HasValue && order.ClientId == model.ClientId.Value)
                 {
                     result.Add(CreateModel(order));
                 }
@@ -58,10 +60,7 @@ namespace RepairListImplement.Implements
 
         public void Insert(OrderBindingModel model)
         {
-            Order tempOrder = new Order 
-            {
-                Id = 1 
-            };
+            var tempOrder = new Order { Id = 1 };
             foreach (var order in source.Orders)
             {
                 if (order.Id >= tempOrder.Id)
@@ -107,17 +106,26 @@ namespace RepairListImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
-
+            order.ClientId = model.ClientId.Value;
             return order;
         }
         private OrderViewModel CreateModel(Order order)
         {
-            string RepairName = null;
-            for (int j = 0; j < source.Repairs.Count; ++j)
+            string repairName = string.Empty;
+            foreach (var repair in source.Repairs)
             {
-                if (source.Repairs[j].Id == order.RepairId)
+                if (repair.Id == order.RepairId)
                 {
-                    RepairName = source.Repairs[j].RepairName;
+                    repairName = repair.RepairName;
+                    break;
+                }
+            }
+            string clientFIO = string.Empty;
+            foreach (var client in source.Clients)
+            {
+                if (client.Id == order.ClientId)
+                {
+                    clientFIO = client.ClientFIO;
                     break;
                 }
             }
@@ -125,12 +133,14 @@ namespace RepairListImplement.Implements
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
-                RepairName = RepairName,
+                RepairName = repairName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ClientId = order.ClientId,
+                ClientFIO = clientFIO
             };
         }
     }

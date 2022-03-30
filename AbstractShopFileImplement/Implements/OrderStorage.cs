@@ -36,8 +36,7 @@ namespace RepairFileImplement.Implements
             {
                 return null;
             }
-            var order = source.Orders
-            .FirstOrDefault(rec => rec.RepairId == model.RepairId || rec.Id == model.Id);
+            var order = source.Orders.FirstOrDefault(rec => rec.RepairId == model.RepairId || rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
 
@@ -47,7 +46,10 @@ namespace RepairFileImplement.Implements
             {
                 return null;
             }
-            return source.Orders.Where(rec => rec.RepairId == model.RepairId || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo).Select(CreateModel).ToList();
+            return source.Orders.
+                Where(rec => rec.RepairId == model.RepairId || 
+            (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) || 
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId.Value)).Select(CreateModel).ToList();
         }
 
         public List<OrderViewModel> GetFullList()
@@ -82,15 +84,19 @@ namespace RepairFileImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = model.ClientId.Value;
             return order;
         }
         private OrderViewModel CreateModel(Order order)
         {
             string repairName = source.Repairs.FirstOrDefault(rec =>rec.Id == order.RepairId).RepairName;
+            string ClientFIO = source.Clients.FirstOrDefault(rec => rec.Id == order.ClientId)?.ClientFIO;
             return new OrderViewModel
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
+                ClientId = order.ClientId,
+                ClientFIO = ClientFIO,
                 RepairName = repairName,
                 Count = order.Count,
                 Sum = order.Sum,

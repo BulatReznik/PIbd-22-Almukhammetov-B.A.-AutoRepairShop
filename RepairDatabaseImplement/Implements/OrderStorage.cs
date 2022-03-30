@@ -23,7 +23,9 @@ namespace RepairDatabaseImplement.Implements
                 Sum = rec.Sum,
                 Status = rec.Status.ToString(),
                 DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
+                DateImplement = rec.DateImplement,
+                ClientId = rec.ClientId,
+                ClientFIO = rec.Client.ClientFIO
             }).ToList();
         }
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
@@ -33,8 +35,10 @@ namespace RepairDatabaseImplement.Implements
                 return null;
             }
             using var context = new RepairDatabase();
-            return context.Orders.Include(rec => rec.Repair).Where(rec => rec.RepairId == model.RepairId || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo).Select(rec => new OrderViewModel
-            {
+            return context.Orders.Include(rec => rec.Repair).Include(rec => rec.Client).Where(rec => rec.RepairId == model.RepairId ||
+               (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+               model.ClientId.HasValue && rec.ClientId == model.ClientId).Select(rec => new OrderViewModel
+               {
                 Id = rec.Id,
                 RepairId = rec.RepairId,
                 RepairName = rec.Repair.RepairName,
@@ -42,7 +46,9 @@ namespace RepairDatabaseImplement.Implements
                 Sum = rec.Sum,
                 Status = rec.Status.ToString(),
                 DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
+                DateImplement = rec.DateImplement,
+                ClientId = rec.ClientId,
+                ClientFIO = rec.Client.ClientFIO
             }).ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -95,6 +101,7 @@ namespace RepairDatabaseImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = model.ClientId.Value;
             return order;
         }
         public OrderViewModel CreateModel(Order order, RepairDatabase context)
@@ -108,7 +115,9 @@ namespace RepairDatabaseImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status.ToString(),
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ClientId = order.ClientId,
+                ClientFIO = order.Client.ClientFIO
             };
         }
     }
