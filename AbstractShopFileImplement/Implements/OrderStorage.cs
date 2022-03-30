@@ -47,7 +47,7 @@ namespace RepairFileImplement.Implements
             {
                 return null;
             }
-            return source.Orders.Where(rec => rec.RepairId == model.RepairId).Select(CreateModel).ToList();
+            return source.Orders.Where(rec => rec.RepairId == model.RepairId || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo).Select(CreateModel).ToList();
         }
 
         public List<OrderViewModel> GetFullList()
