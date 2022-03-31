@@ -1,14 +1,14 @@
 ﻿@{
-ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create";
 }
 <div class="text-center">
     <h2 class="display-4">Создание заказа</h2>
 </div>
 <form method="post">
     <div class="row">
-        <div class="col-4">Изделие:</div>
+        <div class="col-4">Ремонт:</div>
         <div class="col-8">
-            <select id="repair" name="repair" class="form-control" aspitems="@(new SelectList(@ViewBag.Repairs,"Id", "RepairName" ))"></select>
+            <select id="repair" name="repair" class="form-control" asp-items="@(new SelectList(@ViewBag.Repairs,"Id", "RepairName"))"></select>
         </div>
     </div>
     <div class="row">
@@ -18,14 +18,17 @@ ViewData["Title"] = "Create";
     <div class="row">
         <div class="col-4">Сумма:</div>
         <div class="col-8">
-            <input type="text" id="sum" name="sum" readonly="true" />
+            <input type="text" id="sum" name="sum" readonly="readonly" />
         </div>
     </div>
     <div class="row">
         <div class="col-8"></div>
-        <div class="col-4"><input type="submit" value="Создать" class="btn btnprimary" /></div>
+        <div class="col-4">
+            <input type="submit" value="Создать" class="btn btn-primary" />
+        </div>
     </div>
 </form>
+
 <script>
     $('#repair').on('change', function () {
         check();
@@ -45,6 +48,6 @@ ViewData["Title"] = "Create";
                     $("#sum").val(result);
                 }
             });
-        };
+        }
     }
 </script>

@@ -41,8 +41,7 @@ namespace RepairClientApp.Controllers
         [HttpPost]
         public void Privacy(string email, string password, string fio)
         {
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password)
-            && !string.IsNullOrEmpty(fio))
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(fio))
             {
                 APIClient.PostRequest("api/client/updatedata", new ClientBindingModel
                 {
@@ -79,7 +78,7 @@ namespace RepairClientApp.Controllers
         {
             if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
             {
-                Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/email?email={email}&password={password}");
+                Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/login?email={email}&password={password}");
                 if (Program.Client == null)
                 {
                     throw new Exception("Неверный логин/пароль");
@@ -100,8 +99,7 @@ namespace RepairClientApp.Controllers
             if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password)
             && !string.IsNullOrEmpty(fio))
             {
-                APIClient.PostRequest("api/client/register", new
-                ClientBindingModel
+                APIClient.PostRequest("api/client/register", new ClientBindingModel
                 {
                     ClientFIO = fio,
                     Email = email,
@@ -115,7 +113,7 @@ namespace RepairClientApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Repair = APIClient.GetRequest<List<RepairViewModel>>("api/main/getrepairlist");
+            ViewBag.Repairs = APIClient.GetRequest<List<RepairViewModel>>("api/main/getrepairlist");
             return View();
         }
         [HttpPost]
@@ -125,21 +123,20 @@ namespace RepairClientApp.Controllers
             {
                 return;
             }
-            APIClient.PostRequest("api/main/createorder", new OrderViewModel
+            APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {
                 RepairId = repair,
                 Count = count,
                 Sum = sum,
-                ClientId = Program.Client.Id
+                ClientId = (int)Program.Client.Id
             });
             Response.Redirect("Index");
         }
         [HttpPost]
         public decimal Calc(decimal count, int repair)
         {
-            RepairViewModel prod =
-            APIClient.GetRequest<RepairViewModel>($"api/main/getrepair?repairId={repair}");
-            return count * prod.Price;
+            RepairViewModel rep = APIClient.GetRequest<RepairViewModel>($"api/main/getrepair?repairId={repair}");
+            return count * rep.Price;
         }
 
     }
