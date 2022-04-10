@@ -33,6 +33,7 @@ namespace RepairView
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.продуктToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокКомпонентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентыПоРемонтамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +63,8 @@ namespace RepairView
             // 
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.компонентToolStripMenuItem,
-            this.продуктToolStripMenuItem});
+            this.продуктToolStripMenuItem,
+            this.клиентыToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -80,6 +82,13 @@ namespace RepairView
             this.продуктToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.продуктToolStripMenuItem.Text = "Ремонт";
             this.продуктToolStripMenuItem.Click += new System.EventHandler(this.ИзделияToolStripMenuItem_Click);
+            // 
+            // клиентыToolStripMenuItem
+            // 
+            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
+            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.клиентыToolStripMenuItem.Text = "Клиенты";
+            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.КлиентыToolStripMenuItem_Click);
             // 
             // отчетыToolStripMenuItem
             // 
@@ -211,5 +220,6 @@ namespace RepairView
         private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem компонентыПоРемонтамToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
     }
 }

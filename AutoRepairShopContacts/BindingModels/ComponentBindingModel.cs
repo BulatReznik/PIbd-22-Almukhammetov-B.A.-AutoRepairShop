@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RepairContracts.BindingModels
+﻿namespace RepairContracts.BindingModels
 {
     /// <summary>
     /// Компонент, требуемый для изготовления изделия

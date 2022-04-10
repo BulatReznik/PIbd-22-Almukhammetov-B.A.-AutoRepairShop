@@ -14,14 +14,17 @@ namespace RepairFileImplement
         private readonly string ComponentFileName = "Component.xml";
         private readonly string OrderFileName = "Order.xml";
         private readonly string RepairFileName = "Repair.xml";
+        private readonly string ClientFileName = "Client.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Repair> Repairs { get; set; }
+        public List<Client> Clients { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Repairs = LoadRepairs();
+            Clients = LoadClients();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -62,6 +65,7 @@ namespace RepairFileImplement
                     {
                         Id = Convert.ToInt32(elem.Attribute("ID").Value),
                         RepairId = Convert.ToInt32(elem.Element("RepairID").Value),
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
@@ -125,6 +129,7 @@ namespace RepairFileImplement
                         new XElement("Order",
                         new XAttribute("ID", order.Id),
                         new XElement("RepairID", order.RepairId),
+                        new XElement("ClientID", order.ClientId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
                         new XElement("Status", order.Status),
@@ -161,11 +166,49 @@ namespace RepairFileImplement
                 xDocument.Save(RepairFileName);
             }
         }
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                        new XAttribute("Id", client.Id),
+                        new XElement("ClientFIO", client.ClientFIO),
+                        new XElement("Email", client.Email),
+                        new XElement("Password", client.Password)));
+                }
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
+            }
+        }
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                var xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Email = elem.Element("Email").Value,
+                        Password = elem.Element("Password").Value
+                    });
+                }
+            }
+            return list;
+        }
         public static void SaveMethods() 
         {  
             instance.SaveComponents();
             instance.SaveOrders();
             instance.SaveRepairs();
+            instance.SaveClients();
         }
     }
 }
