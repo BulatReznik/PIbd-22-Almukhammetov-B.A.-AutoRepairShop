@@ -31,4 +31,4 @@ namespace RepairRestApi.Controllers
         public void UpdateData(ClientBindingModel model) =>
         _logic.CreateOrUpdate(model);
     }
-}
+}
