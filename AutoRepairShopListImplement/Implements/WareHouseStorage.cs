@@ -18,7 +18,7 @@ namespace RepairListImplement.Implements
         }
         public List<WareHouseViewModel> GetFullList()
         {
-            List<WareHouseViewModel> result = new List<WareHouseViewModel>();
+            List<WareHouseViewModel> result = new();
             foreach (var component in source.WareHouse)
             {
                 result.Add(CreateModel(component));
@@ -31,7 +31,7 @@ namespace RepairListImplement.Implements
             {
                 return null;
             }
-            List<WareHouseViewModel> result = new List<WareHouseViewModel>();
+            List<WareHouseViewModel> result = new();
             foreach (var WareHouse in source.WareHouse)
             {
                 if (WareHouse.WareHouseName.Contains(model.WareHouseName))
@@ -58,7 +58,10 @@ namespace RepairListImplement.Implements
         }
         public void Insert(WareHouseBindingModel model)
         {
-            WareHouse tempWareHouse = new WareHouse { Id = 1, WareHouseComponents = new Dictionary<int, (string, int)>() };
+            WareHouse tempWareHouse = new() 
+            {
+                Id = 1, WareHouseComponents = new Dictionary<int, (string, int)>() 
+            };
             foreach (var WareHouse in source.WareHouse)
             {
                 if (WareHouse.Id >= tempWareHouse.Id)
@@ -124,7 +127,7 @@ namespace RepairListImplement.Implements
         }
         private WareHouseViewModel CreateModel(WareHouse WareHouse)
         {
-            Dictionary<int, (string, int)> WareHouseComponents = new Dictionary<int, (string, int)>();
+            Dictionary<int, (string, int)> WareHouseComponents = new();
             foreach (var sc in WareHouse.WareHouseComponents)
             {
                 string componentName = string.Empty;
@@ -143,9 +146,13 @@ namespace RepairListImplement.Implements
                 Id = WareHouse.Id,
                 WareHouseName = WareHouse.WareHouseName,
                 ResponsibleName = WareHouse.ResponsibleName,
-                DateCreation = WareHouse.DateCreate,
+                DateCreate = WareHouse.DateCreate,
                 WareHouseComponents = WareHouseComponents
             };
+        }
+        public bool CheckWriteOff(CheckWriteOffBindingModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

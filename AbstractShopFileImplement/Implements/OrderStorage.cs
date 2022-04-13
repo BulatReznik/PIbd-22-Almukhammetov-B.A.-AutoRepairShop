@@ -57,7 +57,7 @@ namespace RepairFileImplement.Implements
 
         public void Insert(OrderBindingModel model)
         {
-            int maxId = source.Orders.Count > 0 ? source.Components.Max(rec => rec.Id) : 0;
+            int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec => rec.Id) : 0;
             var element = new Order
             {
                 Id = maxId + 1,

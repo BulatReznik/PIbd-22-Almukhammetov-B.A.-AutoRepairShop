@@ -83,7 +83,7 @@ namespace RepairBusinessLogic.BusinessLogics
 				Id = wareHouse.Id,
 				WareHouseName = wareHouse.WareHouseName,
 				ResponsibleName = wareHouse.ResponsibleName,
-				DateCreate = wareHouse.DateCreation,
+				DateCreate = wareHouse.DateCreate,
 				WareHouseComponents = wareHouse.WareHouseComponents
 			});
 		}
@@ -119,7 +119,7 @@ namespace RepairBusinessLogic.BusinessLogics
 				Id = wareHouse.Id,
 				WareHouseName = wareHouse.WareHouseName,
 				ResponsibleName = wareHouse.ResponsibleName,
-				DateCreate = wareHouse.DateCreation,
+				DateCreate = wareHouse.DateCreate,
 				WareHouseComponents = wareHouse.WareHouseComponents
 			});
 		}

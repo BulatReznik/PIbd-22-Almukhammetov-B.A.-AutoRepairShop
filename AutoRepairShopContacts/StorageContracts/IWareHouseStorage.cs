@@ -14,5 +14,6 @@ namespace RepairContracts.StorageContracts
 		void Insert(WareHouseBindingModel model);
 		void Update(WareHouseBindingModel model);
 		void Delete(WareHouseBindingModel model);
+		bool CheckWriteOff(CheckWriteOffBindingModel model);
 	}
 }

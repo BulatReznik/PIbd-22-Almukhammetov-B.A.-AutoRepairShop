@@ -13,7 +13,7 @@ namespace RepairContracts.ViewModels
         [DisplayName("Сотрудник")]
         public string ResponsibleName { get; set; }
         [DisplayName("Дата создания склада")]
-        public DateTime DateCreation { get; set; }
+        public DateTime DateCreate { get; set; }
         public Dictionary<int, (string, int)> WareHouseComponents { get; set; }
     }
 }
