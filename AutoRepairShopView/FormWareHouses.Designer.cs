@@ -98,6 +98,7 @@ namespace RepairView
             this.Controls.Add(this.ButtonAdd);
             this.Name = "FormWareHouses";
             this.Text = "Склады";
+            this.Load += new System.EventHandler(this.FormWareHouses_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

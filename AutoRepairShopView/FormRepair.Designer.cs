@@ -197,7 +197,7 @@ namespace RepairView
             this.Controls.Add(this.groupBoxMaterials);
             this.Name = "FormRepair";
             this.Text = "Ремонт автомобилей";
-            this.Load += new System.EventHandler(this.ButtonAdd_Click);
+            this.Load += new System.EventHandler(this.FormRepair_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBoxMaterials.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -124,7 +124,7 @@ namespace RepairView
 
         private void ПополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormFillWareHouse>();
+            var form = Program.Container.Resolve<FormAddWareHouse>();
             form.ShowDialog();
         }
     }

@@ -39,8 +39,8 @@ namespace RepairView
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonPayOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
-            this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.пополнениеСкладаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.складыToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.пополнениеСкладаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +48,8 @@ namespace RepairView
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.справочникиToolStripMenuItem});
+            this.справочникиToolStripMenuItem,
+            this.складыToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(804, 24);
@@ -60,7 +61,7 @@ namespace RepairView
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.компонентToolStripMenuItem,
             this.продуктToolStripMenuItem,
-            this.складыToolStripMenuItem});
+            this.пополнениеСкладаToolStripMenuItem1});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -68,14 +69,14 @@ namespace RepairView
             // компонентToolStripMenuItem
             // 
             this.компонентToolStripMenuItem.Name = "компонентToolStripMenuItem";
-            this.компонентToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.компонентToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.компонентToolStripMenuItem.Text = "Расходники";
             this.компонентToolStripMenuItem.Click += new System.EventHandler(this.КомпонентыToolStripMenuItem_Click);
             // 
             // продуктToolStripMenuItem
             // 
             this.продуктToolStripMenuItem.Name = "продуктToolStripMenuItem";
-            this.продуктToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.продуктToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.продуктToolStripMenuItem.Text = "Ремонт";
             this.продуктToolStripMenuItem.Click += new System.EventHandler(this.ИзделияToolStripMenuItem_Click);
             // 
@@ -138,21 +139,19 @@ namespace RepairView
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // складыToolStripMenuItem
+            // складыToolStripMenuItem1
             // 
-            this.складыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.пополнениеСкладаToolStripMenuItem});
-            this.складыToolStripMenuItem.Name = "складыToolStripMenuItem";
-            this.складыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.складыToolStripMenuItem.Text = "Склады";
-            this.складыToolStripMenuItem.Click += new System.EventHandler(this.СкладыToolStripMenuItem_Click);
+            this.складыToolStripMenuItem1.Name = "складыToolStripMenuItem1";
+            this.складыToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
+            this.складыToolStripMenuItem1.Text = "Склады";
+            this.складыToolStripMenuItem1.Click += new System.EventHandler(this.СкладыToolStripMenuItem_Click);
             // 
-            // пополнениеСкладаToolStripMenuItem
+            // пополнениеСкладаToolStripMenuItem1
             // 
-            this.пополнениеСкладаToolStripMenuItem.Name = "пополнениеСкладаToolStripMenuItem";
-            this.пополнениеСкладаToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.пополнениеСкладаToolStripMenuItem.Text = "Пополнение склада";
-            this.пополнениеСкладаToolStripMenuItem.Click += new System.EventHandler(this.ПополнениеСкладаToolStripMenuItem_Click);
+            this.пополнениеСкладаToolStripMenuItem1.Name = "пополнениеСкладаToolStripMenuItem1";
+            this.пополнениеСкладаToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+            this.пополнениеСкладаToolStripMenuItem1.Text = "Пополнение склада";
+            this.пополнениеСкладаToolStripMenuItem1.Click += new System.EventHandler(this.ПополнениеСкладаToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -190,7 +189,7 @@ namespace RepairView
         private System.Windows.Forms.Button buttonRef;
         private System.Windows.Forms.ToolStripMenuItem компонентToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem продуктToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem пополнениеСкладаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пополнениеСкладаToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem1;
     }
 }

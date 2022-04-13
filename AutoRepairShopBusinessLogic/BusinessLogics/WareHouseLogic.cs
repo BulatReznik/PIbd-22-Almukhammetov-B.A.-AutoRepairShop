@@ -1,13 +1,15 @@
 ﻿using RepairContracts.BindingModels;
+using RepairContracts.BusinessLogicsContracts;
 using RepairContracts.StorageContracts;
 using RepairContracts.ViewModels;
+using RepairListImplement.Implements;
 using System;
 using System.Collections.Generic;
 
 
 namespace RepairBusinessLogic.BusinessLogics
 {
-    public class WareHouseLogic
+    public class WareHouseLogic: IWareHouseLogic
 	{
 		private readonly IWareHouseStorage _wareHouseStorage;
 		private readonly IComponentStorage _componentStorage;
@@ -75,6 +77,42 @@ namespace RepairBusinessLogic.BusinessLogics
 					throw new Exception("Компонент не найден");
 				}
 				wareHouse.WareHouseComponents.Add(componentId, (component.ComponentName, count));
+			}
+			_wareHouseStorage.Update(new WareHouseBindingModel
+			{
+				Id = wareHouse.Id,
+				WareHouseName = wareHouse.WareHouseName,
+				ResponsibleName = wareHouse.ResponsibleName,
+				DateCreate = wareHouse.DateCreation,
+				WareHouseComponents = wareHouse.WareHouseComponents
+			});
+		}
+		public void AddComponent(WareHouseBindingModel model, int ComponentId, int Count)
+		{
+			var wareHouse = _wareHouseStorage.GetElement(new WareHouseBindingModel 
+			{ 
+				Id = model.Id 
+			});
+			if (wareHouse == null)
+			{
+				throw new Exception("Элемент не найден");
+			}
+			var component = _componentStorage.GetElement(new ComponentBindingModel 
+			{
+				Id = ComponentId 
+			});
+			if (component == null)
+			{
+				throw new Exception("Элемент не найден");
+			}
+			if (wareHouse.WareHouseComponents.ContainsKey(ComponentId))
+			{
+				int oldCount = wareHouse.WareHouseComponents[ComponentId].Item2;
+				wareHouse.WareHouseComponents[ComponentId] = (component.ComponentName, oldCount + Count);
+			}
+			else
+			{
+				wareHouse.WareHouseComponents.Add(ComponentId, (component.ComponentName, Count));
 			}
 			_wareHouseStorage.Update(new WareHouseBindingModel
 			{

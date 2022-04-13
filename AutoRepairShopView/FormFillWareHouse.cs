@@ -1,5 +1,5 @@
-﻿using RepairBusinessLogic.BusinessLogics;
-using RepairContracts.BindingModels;
+﻿using RepairContracts.BindingModels;
+using RepairContracts.BusinessLogicsContracts;
 using RepairContracts.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,20 +8,19 @@ using Unity;
 
 namespace RepairView
 {
-    public partial class FormFillWareHouse : Form
+    public partial class FormAddWareHouse : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly WareHouseLogic WareHouseLogic;
-        private readonly ComponentLogic componentLogic;
+        private readonly IWareHouseLogic _wareHouseLogic;
         public int WareHouseId { get { return Convert.ToInt32(comboBoxWareHouse.SelectedValue); } set { comboBoxWareHouse.SelectedValue = value; } }
         public int ComponentId { get { return Convert.ToInt32(comboBoxComponent.SelectedValue); } set { comboBoxComponent.SelectedValue = value; } }
         public int Count { get { return Convert.ToInt32(textBoxCount.Text); } set { textBoxCount.Text = value.ToString(); } }
-        public FormFillWareHouse(WareHouseLogic logicWareHouse, ComponentLogic logicComponent)
+        public FormAddWareHouse(IWareHouseLogic logicWareHouse, IComponentLogic logicComponent)
         {
             InitializeComponent();
-            WareHouseLogic = logicWareHouse;
+            _wareHouseLogic = logicWareHouse;
             List<WareHouseViewModel> listWareHouse = logicWareHouse.Read(null);
             if (listWareHouse != null)
             {
@@ -39,14 +38,8 @@ namespace RepairView
                 comboBoxComponent.SelectedItem = null;
             }
         }
-        private void ButtonFill_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            if (textBoxCount.Text.Length == 0)
-            {
-                MessageBox.Show("Пустое поле Количество", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             if (comboBoxWareHouse.SelectedValue == null)
             {
                 MessageBox.Show("Вы не выбрали склад", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -58,7 +51,11 @@ namespace RepairView
                 MessageBox.Show("Вы не выбрали компонент", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            if (string.IsNullOrEmpty(textBoxCount.Text))
+            {
+                MessageBox.Show("Введите количество", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 int count = Convert.ToInt32(textBoxCount.Text);
@@ -66,7 +63,7 @@ namespace RepairView
                 {
                     throw new Exception("Надо пополнять, а не уменьшать");
                 }
-                WareHouseLogic.Fill(new WareHouseBindingModel
+                _wareHouseLogic.AddComponent(new WareHouseBindingModel
                 {
                     Id = Convert.ToInt32(comboBoxWareHouse.SelectedValue)
                 }, Convert.ToInt32(comboBoxComponent.SelectedValue), Convert.ToInt32(textBoxCount.Text));

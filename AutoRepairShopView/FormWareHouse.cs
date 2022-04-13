@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using RepairBusinessLogic.BusinessLogics;
@@ -39,7 +33,6 @@ namespace RepairView
                     {
                         textBoxName.Text = view.WareHouseName;
                         textBoxResponsibleName.Text = view.ResponsibleName.ToString();
-                        dateTimePickerDateCreation.Value = view.DateCreation;
                         wareHouseComponents = view.WareHouseComponents ?? new Dictionary<int, (string, int)>();
                         LoadData();
                     }
@@ -92,7 +85,7 @@ namespace RepairView
                     WareHouseName = textBoxName.Text,
                     ResponsibleName = textBoxResponsibleName.Text,
                     WareHouseComponents = wareHouseComponents ?? new Dictionary<int, (string, int)>(),
-                    DateCreate = dateTimePickerDateCreation.Value
+                    DateCreate = DateTime.Now
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

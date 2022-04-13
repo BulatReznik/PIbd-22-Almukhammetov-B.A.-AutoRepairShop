@@ -1,7 +1,7 @@
 ﻿
 namespace RepairView
 {
-    partial class FormFillWareHouse
+    partial class FormAddWareHouse
     {
         /// <summary>
         /// Required designer variable.
@@ -107,6 +107,7 @@ namespace RepairView
             this.ButtonSave.TabIndex = 9;
             this.ButtonSave.Text = "Сохранить";
             this.ButtonSave.UseVisualStyleBackColor = true;
+            this.ButtonSave.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // FormFillWareHouse
             // 

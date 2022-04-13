@@ -9,7 +9,7 @@ using System.Text;
 
 namespace RepairListImplement.Implements
 {
-    class WareHouseStorage : IWareHouseStorage
+    public class WareHouseStorage : IWareHouseStorage
     {
         private readonly DataListSingleton source;
         public WareHouseStorage()
