@@ -67,7 +67,8 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Выдан,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId
             });
         }
 
@@ -91,7 +92,8 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId
             });
         }
 
@@ -116,7 +118,8 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
                 Status = OrderStatus.Выполняется,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId,
             });
         }
     }

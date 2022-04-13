@@ -48,8 +48,10 @@ namespace RepairFileImplement.Implements
             }
             return source.Orders.
                 Where(rec => rec.RepairId == model.RepairId || 
-            (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) || 
-            (model.ClientId.HasValue && rec.ClientId == model.ClientId.Value)).Select(CreateModel).ToList();
+            (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+             (model.ClientId.HasValue && rec.ClientId == model.ClientId.Value)||
+             (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status)||
+             (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status)).Select(CreateModel).ToList();
         }
 
         public List<OrderViewModel> GetFullList()
@@ -91,6 +93,7 @@ namespace RepairFileImplement.Implements
         {
             string repairName = source.Repairs.FirstOrDefault(rec =>rec.Id == order.RepairId).RepairName;
             string ClientFIO = source.Clients.FirstOrDefault(rec => rec.Id == order.ClientId)?.ClientFIO;
+            string ImplementerFIO = source.Implementers.FirstOrDefault(rec => rec.Id == order.ImplementerId)?.ImplementerFIO;
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -102,7 +105,9 @@ namespace RepairFileImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status.ToString(),
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = ImplementerFIO
             };
         }
     }

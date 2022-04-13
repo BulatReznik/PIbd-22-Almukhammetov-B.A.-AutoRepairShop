@@ -15,16 +15,19 @@ namespace RepairFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string RepairFileName = "Repair.xml";
         private readonly string ClientFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Repair> Repairs { get; set; }
         public List<Client> Clients { get; set; }
+        public List<Implementer> Implementers { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Repairs = LoadRepairs();
             Clients = LoadClients();
+            Implementers = LoadImplementers();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -71,6 +74,27 @@ namespace RepairFileImplement
                         Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
                         DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
                         DateImplement = string.IsNullOrEmpty(elem.Element("DateImplement").Value) ? (DateTime?)null : Convert.ToDateTime(elem.Element("DateImplement").Value),
+                        ImplementerId = string.IsNullOrEmpty(elem.Element("ImplementerId").Value) ? (int?)null : Convert.ToInt32(elem.Element("ImplementerId").Value),
+                    });
+                }
+            }
+            return list;
+        }
+        private List<Implementer> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                XDocument xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Implementer").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ImplementerFIO = elem.Element("Name").Value,
+                        WorkingTime = Convert.ToInt32(elem.Element("WorkingTime").Value),
+                        PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value)
                     });
                 }
             }
@@ -130,6 +154,7 @@ namespace RepairFileImplement
                         new XAttribute("ID", order.Id),
                         new XElement("RepairID", order.RepairId),
                         new XElement("ClientID", order.ClientId),
+                        new XElement("ImplementerId", order.ImplementerId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
                         new XElement("Status", order.Status),
@@ -203,12 +228,30 @@ namespace RepairFileImplement
             }
             return list;
         }
+        private void SaveImplementers()
+        {
+            if (Implementers != null)
+            {
+                var xElement = new XElement("Implementers");
+                foreach (var client in Implementers)
+                {
+                    xElement.Add(new XElement("Implementer",
+                    new XAttribute("Id", client.Id),
+                    new XElement("Name", client.ImplementerFIO),
+                    new XElement("WorkingTime", client.WorkingTime),
+                    new XElement("PauseTime", client.PauseTime)));
+                }
+                XDocument xDocument = new(xElement);
+                xDocument.Save(ImplementerFileName);
+            }
+        }
         public static void SaveMethods() 
         {  
             instance.SaveComponents();
             instance.SaveOrders();
             instance.SaveRepairs();
             instance.SaveClients();
+            instance.SaveImplementers();
         }
     }
 }
