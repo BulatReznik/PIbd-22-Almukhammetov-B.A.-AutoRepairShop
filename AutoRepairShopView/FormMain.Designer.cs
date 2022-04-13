@@ -162,8 +162,9 @@ namespace RepairView
             this.buttonOrderReady.Name = "buttonOrderReady";
             this.buttonOrderReady.Size = new System.Drawing.Size(111, 60);
             this.buttonOrderReady.TabIndex = 4;
-            this.buttonOrderReady.Text = "Заказ готов";
+            this.buttonOrderReady.Text = "Заказ выдан";
             this.buttonOrderReady.UseVisualStyleBackColor = true;
+            this.buttonOrderReady.Click += new System.EventHandler(this.ButtonIssuedOrder_Click);
             // 
             // buttonRef
             // 

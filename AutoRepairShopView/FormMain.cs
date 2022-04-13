@@ -67,6 +67,7 @@ namespace RepairView
         private void ЗапускРаботToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _workProcess.DoWork(_implementerLogic, _orderLogic);
+            LoadData();
         }
         private void ButtonCreateOrder_Click(object sender, EventArgs e)
         {
