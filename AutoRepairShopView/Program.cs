@@ -1,19 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RepairContracts.BusinessLogicsContracts;
 using RepairContracts.StorageContracts;
 using RepairBusinessLogic.BusinessLogics;
-using RepairListImplement.Implements;
+using RepairFileImplement.Implements;
 using Unity;
 using Unity.Lifetime;
+using RepairFileImplement;
 
 namespace RepairView
 {
     static class Program
     {
+
         private static IUnityContainer container = null;
         public static IUnityContainer Container
         {
@@ -37,6 +36,7 @@ namespace RepairView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
+            FileDataListSingleton.SaveMethods();
         }
         private static IUnityContainer BuildUnityContainer()
         {
