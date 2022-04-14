@@ -49,7 +49,10 @@ namespace RepairBusinessLogic.BusinessLogics
 
         public void DeliveryOrder(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            {
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
@@ -74,7 +77,10 @@ namespace RepairBusinessLogic.BusinessLogics
 
         public void FinishOrder(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            {
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
@@ -100,7 +106,10 @@ namespace RepairBusinessLogic.BusinessLogics
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            { 
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
