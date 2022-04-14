@@ -49,7 +49,7 @@ namespace RepairFileImplement.Implements
         public void Insert(ImplementerBindingModel model)
         {
 
-            int maxId = source.Implementers.Count > 0 ? source.Clients.Max(rec => rec.Id) : 0;
+            int maxId = source.Implementers.Count > 0 ? source.Implementers.Max(rec => rec.Id) : 0;
             var element = new Implementer { Id = maxId + 1 };
             source.Implementers.Add(CreateModel(model, element));
 
