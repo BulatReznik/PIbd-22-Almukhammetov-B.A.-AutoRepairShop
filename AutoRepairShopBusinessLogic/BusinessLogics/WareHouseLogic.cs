@@ -57,36 +57,6 @@ namespace RepairBusinessLogic.BusinessLogics
 			}
 			_wareHouseStorage.Delete(model);
 		}
-		public void Fill(WareHouseBindingModel model, int componentId, int count)
-		{
-			var wareHouse = _wareHouseStorage.GetElement(new WareHouseBindingModel { Id = model.Id });
-
-			if (wareHouse.WareHouseComponents.ContainsKey(componentId))
-			{
-				wareHouse.WareHouseComponents[componentId] =
-					(wareHouse.WareHouseComponents[componentId].Item1, wareHouse.WareHouseComponents[componentId].Item2 + count);
-			}
-			else
-			{
-				var component = _componentStorage.GetElement(new ComponentBindingModel
-				{
-					Id = componentId
-				});
-				if (component == null)
-				{
-					throw new Exception("Компонент не найден");
-				}
-				wareHouse.WareHouseComponents.Add(componentId, (component.ComponentName, count));
-			}
-			_wareHouseStorage.Update(new WareHouseBindingModel
-			{
-				Id = wareHouse.Id,
-				WareHouseName = wareHouse.WareHouseName,
-				ResponsibleName = wareHouse.ResponsibleName,
-				DateCreate = wareHouse.DateCreate,
-				WareHouseComponents = wareHouse.WareHouseComponents
-			});
-		}
 		public void AddComponent(WareHouseBindingModel model, int ComponentId, int Count)
 		{
 			var wareHouse = _wareHouseStorage.GetElement(new WareHouseBindingModel 

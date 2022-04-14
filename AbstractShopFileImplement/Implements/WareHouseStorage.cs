@@ -39,16 +39,13 @@ namespace RepairFileImplement.Implements
             {
                 return null;
             }
-
             var wareHouse = source.WareHouses.FirstOrDefault(rec => rec.WareHouseName == model.WareHouseName || rec.Id == model.Id);
-
             return wareHouse != null ? CreateModel(wareHouse) : null;
         }
 
         public void Insert(WareHouseBindingModel model)
         {
             int maxId = source.WareHouses.Count > 0 ? source.WareHouses.Max(rec => rec.Id) : 0;
-
             var element = new WareHouse { Id = maxId + 1, WareHouseComponents = new Dictionary<int,int>() };
             source.WareHouses.Add(CreateModel(model, element));
         }
@@ -60,7 +57,6 @@ namespace RepairFileImplement.Implements
             {
                 throw new Exception("Элемент не найден");
             }
-
             CreateModel(model, element);
         }
 
@@ -85,20 +81,19 @@ namespace RepairFileImplement.Implements
             neccesary.ToDictionary(kvp => neccesary[kvp.Key] *= model.Count);
             foreach (var wareHouse in list)
             {
-                foreach (var ingr in wareHouse.WareHouseComponents)
+                foreach (var component in wareHouse.WareHouseComponents)
                 {
-                    if (available.ContainsKey(ingr.Key))
+                    if (available.ContainsKey(component.Key))
                     {
-                        available[ingr.Key] += ingr.Value.Item2;
+                        available[component.Key] += component.Value.Item2;
                     }
                     else
                     {
-                        available.Add(ingr.Key, ingr.Value.Item2);
+                        available.Add(component.Key, component.Value.Item2);
                     }
                 }
             }
-
-            bool can = available.ToList().All(ingr => ingr.Value >= neccesary[ingr.Key]);
+            bool can = available.ToList().All(component => component.Value >= neccesary[component.Key]);
             if (!can || available.Count == 0)
             {
                 return false;
@@ -156,8 +151,7 @@ namespace RepairFileImplement.Implements
                 }
                 else
                 {
-                    wareHouse.WareHouseComponents.Add(component.Key,
-                        model.WareHouseComponents[component.Key].Item2);
+                    wareHouse.WareHouseComponents.Add(component.Key, model.WareHouseComponents[component.Key].Item2);
                 }
             }
             return wareHouse;
@@ -173,8 +167,7 @@ namespace RepairFileImplement.Implements
                 DateCreate = wareHouse.DateCreate,
                 WareHouseComponents = wareHouse.WareHouseComponents
                     .ToDictionary(recPC => recPC.Key, recPC =>
-                    (source.Components.FirstOrDefault(recC => recC.Id ==
-                    recPC.Key)?.ComponentName, recPC.Value))
+                    (source.Components.FirstOrDefault(recC => recC.Id == recPC.Key)?.ComponentName, recPC.Value))
             };
         }
     }
