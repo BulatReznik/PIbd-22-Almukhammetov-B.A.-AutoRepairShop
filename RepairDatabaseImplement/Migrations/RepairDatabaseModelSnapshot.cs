@@ -111,6 +111,54 @@ namespace RepairDatabaseImplement.Migrations
                     b.ToTable("RepairComponents");
                 });
 
+            modelBuilder.Entity("RepairDatabaseImplement.Models.WareHouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResponsibleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WareHouseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WareHouses");
+                });
+
+            modelBuilder.Entity("RepairDatabaseImplement.Models.WareHouseComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WareHouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentId");
+
+                    b.HasIndex("WareHouseId");
+
+                    b.ToTable("WareHouseComponents");
+                });
+
             modelBuilder.Entity("RepairDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("RepairDatabaseImplement.Models.Repair", "Repair")
@@ -141,9 +189,30 @@ namespace RepairDatabaseImplement.Migrations
                     b.Navigation("Repair");
                 });
 
+            modelBuilder.Entity("RepairDatabaseImplement.Models.WareHouseComponent", b =>
+                {
+                    b.HasOne("RepairDatabaseImplement.Models.Component", "Component")
+                        .WithMany("WareHouseComponents")
+                        .HasForeignKey("ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RepairDatabaseImplement.Models.WareHouse", "WareHouse")
+                        .WithMany("WareHouseComponents")
+                        .HasForeignKey("WareHouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Component");
+
+                    b.Navigation("WareHouse");
+                });
+
             modelBuilder.Entity("RepairDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("RepairComponents");
+
+                    b.Navigation("WareHouseComponents");
                 });
 
             modelBuilder.Entity("RepairDatabaseImplement.Models.Repair", b =>
@@ -151,6 +220,11 @@ namespace RepairDatabaseImplement.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("RepairComponents");
+                });
+
+            modelBuilder.Entity("RepairDatabaseImplement.Models.WareHouse", b =>
+                {
+                    b.Navigation("WareHouseComponents");
                 });
 #pragma warning restore 612, 618
         }

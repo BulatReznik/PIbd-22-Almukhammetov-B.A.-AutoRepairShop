@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RepairDatabaseImplement.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class WareHouse : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +32,21 @@ namespace RepairDatabaseImplement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Repairs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WareHouses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WareHouseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ResponsibleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WareHouses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,6 +100,33 @@ namespace RepairDatabaseImplement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "WareHouseComponents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WareHouseId = table.Column<int>(type: "int", nullable: false),
+                    ComponentId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WareHouseComponents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WareHouseComponents_Components_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "Components",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_WareHouseComponents_WareHouses_WareHouseId",
+                        column: x => x.WareHouseId,
+                        principalTable: "WareHouses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_RepairId",
                 table: "Orders",
@@ -99,6 +141,16 @@ namespace RepairDatabaseImplement.Migrations
                 name: "IX_RepairComponents_RepairId",
                 table: "RepairComponents",
                 column: "RepairId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WareHouseComponents_ComponentId",
+                table: "WareHouseComponents",
+                column: "ComponentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WareHouseComponents_WareHouseId",
+                table: "WareHouseComponents",
+                column: "WareHouseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -110,10 +162,16 @@ namespace RepairDatabaseImplement.Migrations
                 name: "RepairComponents");
 
             migrationBuilder.DropTable(
-                name: "Components");
+                name: "WareHouseComponents");
 
             migrationBuilder.DropTable(
                 name: "Repairs");
+
+            migrationBuilder.DropTable(
+                name: "Components");
+
+            migrationBuilder.DropTable(
+                name: "WareHouses");
         }
     }
 }

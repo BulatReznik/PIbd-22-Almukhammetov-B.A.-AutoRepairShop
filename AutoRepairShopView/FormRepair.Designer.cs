@@ -33,11 +33,8 @@ namespace RepairView
             this.ButtonDel = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
             this.ButtonAdd = new System.Windows.Forms.Button();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxMaterials = new System.Windows.Forms.GroupBox();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.textBoxNameRepair = new System.Windows.Forms.TextBox();
@@ -47,8 +44,8 @@ namespace RepairView
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBoxMaterials.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // ButtonUpd
@@ -91,35 +88,6 @@ namespace RepairView
             this.ButtonAdd.UseVisualStyleBackColor = true;
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
-            // dataGridView
-            // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Сolumn1,
-            this.Сolumn2,
-            this.Сolumn3});
-            this.dataGridView.Location = new System.Drawing.Point(6, 22);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(549, 298);
-            this.dataGridView.TabIndex = 8;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Id";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Расходник";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Количество";
-            this.Column3.Name = "Column3";
-            // 
             // groupBoxMaterials
             // 
             this.groupBoxMaterials.Controls.Add(this.dataGridView);
@@ -133,6 +101,19 @@ namespace RepairView
             this.groupBoxMaterials.TabIndex = 9;
             this.groupBoxMaterials.TabStop = false;
             this.groupBoxMaterials.Text = "Ремонт автомобилей";
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3});
+            this.dataGridView.Location = new System.Drawing.Point(7, 23);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowTemplate.Height = 25;
+            this.dataGridView.Size = new System.Drawing.Size(571, 308);
+            this.dataGridView.TabIndex = 8;
             // 
             // ButtonCancel
             // 
@@ -217,8 +198,8 @@ namespace RepairView
             this.Name = "FormRepair";
             this.Text = "Ремонт автомобилей";
             this.Load += new System.EventHandler(this.FormRepair_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBoxMaterials.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,7 +211,6 @@ namespace RepairView
         private System.Windows.Forms.Button ButtonDel;
         private System.Windows.Forms.Button ButtonRef;
         private System.Windows.Forms.Button ButtonAdd;
-        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.GroupBox groupBoxMaterials;
         private System.Windows.Forms.Button ButtonCancel;
         private System.Windows.Forms.Button ButtonSave;
@@ -241,5 +221,9 @@ namespace RepairView
         private System.Windows.Forms.DataGridViewTextBoxColumn Сolumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Сolumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Сolumn3;
+        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }
