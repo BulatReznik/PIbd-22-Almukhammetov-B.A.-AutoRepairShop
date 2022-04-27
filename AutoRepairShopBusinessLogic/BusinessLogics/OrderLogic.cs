@@ -1,4 +1,5 @@
 ﻿using RepairBusinessLogic.BusinessLogics;
+using RepairBusinessLogic.MailWorker;
 using RepairContracts.BindingModels;
 using RepairContracts.BusinessLogicsContracts;
 using RepairContracts.Enums;
@@ -13,9 +14,13 @@ namespace RepairBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly AbstractMailWorker _mailWorker;
+        private readonly IClientStorage _clientStorage;
+        public OrderLogic(IOrderStorage orderStorage, AbstractMailWorker mailWorker, IClientStorage clientStorage)
         {
             _orderStorage = orderStorage;
+            _mailWorker = mailWorker;
+            _clientStorage = clientStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -45,6 +50,12 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = DateTime.Now,
                 ClientId = model.ClientId
             });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = model.ClientId })?.Email,
+                Subject = "Создан новый заказ",
+                Text = $"Дата заказа: {DateTime.Now}, сумма заказа: {model.Sum}"
+            });
         }
 
         public void DeliveryOrder(ChangeStatusBindingModel model)
@@ -72,6 +83,12 @@ namespace RepairBusinessLogic.BusinessLogics
                 Status = OrderStatus.Выдан,
                 ClientId = order.ClientId,
                 ImplementerId = order.ImplementerId
+            });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                Subject = $"Смена статуса заказа№ {order.Id}",
+                Text = $"Статус изменен на: {OrderStatus.Выдан}"
             });
         }
 
@@ -101,6 +118,12 @@ namespace RepairBusinessLogic.BusinessLogics
                 ClientId = order.ClientId,
                 ImplementerId = order.ImplementerId
             });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                Subject = $"Смена статуса заказа№ {order.Id}",
+                Text = $"Статус изменен на: {OrderStatus.Готов}"
+            });
         }
 
 
@@ -129,6 +152,12 @@ namespace RepairBusinessLogic.BusinessLogics
                 Status = OrderStatus.Выполняется,
                 ClientId = order.ClientId,
                 ImplementerId = model.ImplementerId,
+            });
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                Subject = $"Смена статуса заказа№ {order.Id}",
+                Text = $"Статус изменен на: {OrderStatus.Выполняется}"
             });
         }
     }

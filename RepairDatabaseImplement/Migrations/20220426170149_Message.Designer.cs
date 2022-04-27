@@ -10,8 +10,8 @@ using RepairDatabaseImplement;
 namespace RepairDatabaseImplement.Migrations
 {
     [DbContext(typeof(RepairDatabase))]
-    [Migration("20220412175641_Imlementer")]
-    partial class Imlementer
+    [Migration("20220426170149_Message")]
+    partial class Message
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,6 +81,33 @@ namespace RepairDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Implementers");
+                });
+
+            modelBuilder.Entity("RepairDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.Property<string>("MessageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDelivery")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("RepairDatabaseImplement.Models.Order", b =>
@@ -169,6 +196,15 @@ namespace RepairDatabaseImplement.Migrations
                     b.ToTable("RepairComponents");
                 });
 
+            modelBuilder.Entity("RepairDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.HasOne("RepairDatabaseImplement.Models.Client", "Client")
+                        .WithMany("Messages")
+                        .HasForeignKey("ClientId");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("RepairDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("RepairDatabaseImplement.Models.Client", "Client")
@@ -213,6 +249,8 @@ namespace RepairDatabaseImplement.Migrations
 
             modelBuilder.Entity("RepairDatabaseImplement.Models.Client", b =>
                 {
+                    b.Navigation("Messages");
+
                     b.Navigation("Orders");
                 });
 

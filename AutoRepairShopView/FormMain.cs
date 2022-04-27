@@ -69,6 +69,11 @@ namespace RepairView
             _workProcess.DoWork(_implementerLogic, _orderLogic);
             LoadData();
         }
+        private void ПочтаToolStripMenuItemClick(object sender, EventArgs e) 
+        {
+            var form = Program.Container.Resolve<FormMessages>();
+            form.ShowDialog();
+        }
         private void ButtonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormCreateOrder>();

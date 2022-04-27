@@ -6,8 +6,12 @@ using RepairBusinessLogic.BusinessLogics;
 using RepairDatabaseImplement.Implements;
 using RepairBusinessLogic.OfficePackage.Implements;
 using RepairBusinessLogic.OfficePackage;
+using System.Configuration;
+using System.Threading;
 using Unity;
 using Unity.Lifetime;
+using RepairBusinessLogic.MailWorker;
+using RepairContracts.BindingModels;
 
 namespace RepairView
 {
@@ -33,6 +37,18 @@ namespace RepairView
         static void Main()
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            var mailSender = Container.Resolve<AbstractMailWorker>();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = ConfigurationManager.AppSettings["MailLogin"],
+                MailPassword = ConfigurationManager.AppSettings["MailPassword"],
+                SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
+                PopHost = ConfigurationManager.AppSettings["PopHost"],
+                PopPort = Convert.ToInt32(ConfigurationManager.AppSettings["PopPort"])
+            });
+            // создаем таймер
+            var timer = new System.Threading.Timer(new TimerCallback(MailCheck), null, 0, 100000);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
@@ -53,6 +69,8 @@ namespace RepairView
 
             currentContainer.RegisterType<IImplementerStorage, ImplementerStorage>(new HierarchicalLifetimeManager());
 
+            currentContainer.RegisterType<IMessageInfoStorage, MessageInfoStorage>(new HierarchicalLifetimeManager());
+
             currentContainer.RegisterType<IImplementerLogic, ImplementerLogic>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new HierarchicalLifetimeManager());
@@ -63,6 +81,8 @@ namespace RepairView
 
             currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
 
+            currentContainer.RegisterType<IMessageInfoLogic, MessageInfoLogic>(new HierarchicalLifetimeManager());
+
             currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
@@ -71,8 +91,12 @@ namespace RepairView
 
             currentContainer.RegisterType<IWorkProcess, WorkModeling>(new HierarchicalLifetimeManager());
 
+            currentContainer.RegisterType<AbstractMailWorker, MailKitWorker>(new SingletonLifetimeManager());
+
             return currentContainer;
         }
+        private static void MailCheck(object obj) =>Container.Resolve<AbstractMailWorker>().MailCheck();
     }
 }
+
 
