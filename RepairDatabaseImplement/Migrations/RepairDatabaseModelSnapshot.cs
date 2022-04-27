@@ -59,6 +59,28 @@ namespace RepairDatabaseImplement.Migrations
                     b.ToTable("Components");
                 });
 
+            modelBuilder.Entity("RepairDatabaseImplement.Models.Implementer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImplementerFIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PauseTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkingTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Implementers");
+                });
+
             modelBuilder.Entity("RepairDatabaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -66,7 +88,7 @@ namespace RepairDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClientId")
+                    b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<int>("Count")
@@ -77,6 +99,9 @@ namespace RepairDatabaseImplement.Migrations
 
                     b.Property<DateTime?>("DateImplement")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ImplementerId")
+                        .HasColumnType("int");
 
                     b.Property<int>("RepairId")
                         .HasColumnType("int");
@@ -90,6 +115,8 @@ namespace RepairDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("ImplementerId");
 
                     b.HasIndex("RepairId");
 
@@ -144,9 +171,11 @@ namespace RepairDatabaseImplement.Migrations
                 {
                     b.HasOne("RepairDatabaseImplement.Models.Client", "Client")
                         .WithMany("Orders")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("RepairDatabaseImplement.Models.Implementer", "Implementer")
+                        .WithMany("Orders")
+                        .HasForeignKey("ImplementerId");
 
                     b.HasOne("RepairDatabaseImplement.Models.Repair", "Repair")
                         .WithMany("Orders")
@@ -155,6 +184,8 @@ namespace RepairDatabaseImplement.Migrations
                         .IsRequired();
 
                     b.Navigation("Client");
+
+                    b.Navigation("Implementer");
 
                     b.Navigation("Repair");
                 });
@@ -186,6 +217,11 @@ namespace RepairDatabaseImplement.Migrations
             modelBuilder.Entity("RepairDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("RepairComponents");
+                });
+
+            modelBuilder.Entity("RepairDatabaseImplement.Models.Implementer", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("RepairDatabaseImplement.Models.Repair", b =>

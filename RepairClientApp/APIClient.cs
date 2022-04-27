@@ -8,7 +8,7 @@ namespace RepairClientApp
 {
     public static class APIClient
     {
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new();
         public static void Connect(IConfiguration configuration)
         {
             client.BaseAddress = new Uri(configuration["IPAddress"]);

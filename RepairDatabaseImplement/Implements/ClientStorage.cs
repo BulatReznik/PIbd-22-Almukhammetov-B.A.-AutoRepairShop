@@ -5,8 +5,6 @@ using RepairDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RepairDatabaseImplement.Implements
 {
@@ -14,7 +12,7 @@ namespace RepairDatabaseImplement.Implements
     {
         public List<ClientViewModel> GetFullList()
         {
-            using (var context = new RepairDatabase())
+            using var context = new RepairDatabase();
             return context.Clients.Select(CreateModel).ToList();
         }
 

@@ -49,7 +49,10 @@ namespace RepairBusinessLogic.BusinessLogics
 
         public void DeliveryOrder(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            {
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
@@ -67,13 +70,17 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Выдан,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId
             });
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            {
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
@@ -91,14 +98,18 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId
             });
         }
 
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            { 
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
@@ -116,7 +127,8 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
                 Status = OrderStatus.Выполняется,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId,
             });
         }
     }

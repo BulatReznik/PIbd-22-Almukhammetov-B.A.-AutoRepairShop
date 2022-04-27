@@ -41,7 +41,7 @@ namespace RepairDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                Repair repair = new Repair()
+                Repair repair = new()
                 {
                     RepairName = model.RepairName,
                     Price = model.Price
@@ -108,7 +108,6 @@ namespace RepairDatabaseImplement.Implements
                 }
                 context.SaveChanges();
             }
-            // добавили новые
             foreach (var pc in model.RepairComponents)
             {
                 context.RepairComponents.Add(new RepairComponent
@@ -129,8 +128,8 @@ namespace RepairDatabaseImplement.Implements
                 RepairName = repair.RepairName,
                 Price = repair.Price,
                 RepairComponents = repair.RepairComponents.
-               ToDictionary(recPC => recPC.ComponentId,
-               recPC => (recPC.Component?.ComponentName, recPC.Count))
+                ToDictionary(recPC => recPC.ComponentId,
+                recPC => (recPC.Component?.ComponentName, recPC.Count))
             };
         }
     }
