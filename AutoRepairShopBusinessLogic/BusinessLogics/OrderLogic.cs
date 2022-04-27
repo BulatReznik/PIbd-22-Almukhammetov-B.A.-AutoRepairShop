@@ -107,7 +107,7 @@ namespace RepairBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            if (!_wareHouseStorage.CheckWriteOff(new CheckWriteOffBindingModel
+            if (!_wareHouseStorage.CheckWriteOff(new CheckWriteOffBindingModel // TODO: МБИ НАДО БУДЕТ ДОДЕЛАТЬ
             {
                 RepairId = order.RepairId,
                 Count = order.Count

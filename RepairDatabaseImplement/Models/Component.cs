@@ -20,5 +20,7 @@ namespace RepairDatabaseImplement.Models
 
         [ForeignKey("ComponentId")]
         public virtual List<RepairComponent> RepairComponents { get; set; }
+        [ForeignKey("ComponentId")]
+        public virtual List<WareHouseComponent> WareHouseComponents { get; set; }
     }
 }
