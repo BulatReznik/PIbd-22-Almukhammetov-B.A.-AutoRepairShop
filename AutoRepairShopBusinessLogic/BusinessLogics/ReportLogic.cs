@@ -107,6 +107,7 @@ namespace RepairBusinessLogic.BusinessLogics
             })
            .ToList();
         }
+
         public List<ReportOrdersInfoViewModel> GetOrdersGroupByDate()
         {
             return _orderStorage.GetFullList().GroupBy(x => x.DateCreate.Date)
@@ -141,7 +142,7 @@ namespace RepairBusinessLogic.BusinessLogics
                 FileName = model.FileName,
                 Title = "Список компонент",
                 RepairComponents = GetRepairComponent(),
-                SheetType = ExcelSheetType.WareHouse
+                SheetType = ExcelSheetType.Repair
             });
         }
         /// <summary>
@@ -160,6 +161,10 @@ namespace RepairBusinessLogic.BusinessLogics
                 Type = PdfReportType.Filtered
             });
         }
+        /// <summary>
+        /// Сохранение Заказов по дате в файл-Word
+        /// </summary>
+        /// <param name="model"></param>
         public void SaveOrdersInfoToPdfFile(ReportBindingModel model)
         {
             _saveToPdf.CreateDoc(new PdfInfo
@@ -170,6 +175,10 @@ namespace RepairBusinessLogic.BusinessLogics
                 Type = PdfReportType.All
             });
         }
+        /// <summary>
+        /// Сохранение Складов в файл-Word
+        /// </summary>
+        /// <param name="model"></param>
         public void SaveWareHousesToWordFile(ReportBindingModel model)
         {
             _saveToWord.CreateDoc(new WordInfo
@@ -180,7 +189,10 @@ namespace RepairBusinessLogic.BusinessLogics
                 DocumentType = WordDocumentType.Table
             });
         }
-
+        /// <summary>
+        /// Сохранение Складов с компонентами в Exel
+        /// </summary>
+        /// <param name="model"></param>
         public void SaveWareHouseComponentToExcelFile(ReportBindingModel model)
         {
             _saveToExcel.CreateReport(new ExcelInfo

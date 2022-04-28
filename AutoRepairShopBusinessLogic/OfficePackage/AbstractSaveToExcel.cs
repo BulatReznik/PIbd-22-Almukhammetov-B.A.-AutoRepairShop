@@ -51,7 +51,7 @@ namespace RepairBusinessLogic.OfficePackage
                             ColumnName = "C",
                             RowIndex = rowIndex,
                             Text = pc.TotalCount.ToString(),
-                            StyleInfo = ExcelStyleInfoType.TextWithBroder ///////////
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder
                         });
                         rowIndex++;
                     }
@@ -105,7 +105,7 @@ namespace RepairBusinessLogic.OfficePackage
                     rowIndex++;
                 }
             }
-            SaveExcel(info);////////////
+            SaveExcel(info);
         }
         /// <summary>
         /// Создание excel-файла

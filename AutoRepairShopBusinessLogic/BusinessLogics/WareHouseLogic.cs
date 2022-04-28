@@ -36,9 +36,7 @@ namespace RepairBusinessLogic.BusinessLogics
 			if (element != null && element.Id != model.Id)
 			{
 				throw new Exception("Уже есть склад с таким названием");
-
 			}
-
 			if (model.Id.HasValue)
 			{
 				_wareHouseStorage.Update(model);

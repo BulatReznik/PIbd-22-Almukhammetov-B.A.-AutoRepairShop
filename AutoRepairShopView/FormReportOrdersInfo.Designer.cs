@@ -84,7 +84,7 @@ namespace RepairView
             this.Controls.Add(this.panel);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormReportOrdersInfo";
-            this.Text = "FormReportOrdersInfo";
+            this.Text = "Заказы";
             this.panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
