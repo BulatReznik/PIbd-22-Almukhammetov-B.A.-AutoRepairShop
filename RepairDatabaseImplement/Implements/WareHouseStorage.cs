@@ -167,10 +167,8 @@ namespace RepairDatabaseImplement.Implements
             {
                 var warehouseIngredients = context.WareHouseComponents.Where(rec =>
                 rec.WareHouseId == model.Id.Value).ToList();
-                // удалили те, которых нет в модели
                 context.WareHouseComponents.RemoveRange(warehouseIngredients.Where(rec => !model.WareHouseComponents.ContainsKey(rec.ComponentId)).ToList());
                 context.SaveChanges();
-                // обновили количество у существующих записей
                 foreach (var updateIngredient in warehouseIngredients)
                 {
                     updateIngredient.Count = model.WareHouseComponents[updateIngredient.ComponentId].Item2;

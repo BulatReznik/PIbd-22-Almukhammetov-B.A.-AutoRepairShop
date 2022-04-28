@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RepairDatabaseImplement.Migrations
 {
-    public partial class WareHouse : Migration
+    public partial class Hard3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
