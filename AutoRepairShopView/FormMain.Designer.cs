@@ -44,6 +44,7 @@ namespace RepairView
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
+            this.пToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +54,8 @@ namespace RepairView
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
             this.отчетыToolStripMenuItem,
-            this.ЗапускРаботToolStripMenuItem});
+            this.ЗапускРаботToolStripMenuItem,
+            this.пToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(933, 24);
@@ -176,6 +178,13 @@ namespace RepairView
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
+            // пToolStripMenuItem
+            // 
+            this.пToolStripMenuItem.Name = "пToolStripMenuItem";
+            this.пToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.пToolStripMenuItem.Text = "Почта";
+            this.пToolStripMenuItem.Click += new System.EventHandler(this.ПочтаToolStripMenuItemClick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -215,5 +224,6 @@ namespace RepairView
         private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ЗапускРаботToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пToolStripMenuItem;
     }
 }

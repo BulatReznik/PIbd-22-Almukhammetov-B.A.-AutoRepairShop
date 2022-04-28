@@ -15,10 +15,12 @@ namespace AbstractShopRestApi.Controllers
     {
         private readonly IOrderLogic _order;
         private readonly IRepairLogic _repair;
-        public MainController(IOrderLogic order, IRepairLogic repair)
+        private readonly IMessageInfoLogic _message;
+        public MainController(IOrderLogic order, IRepairLogic repair, IMessageInfoLogic message)
         {
             _order = order;
             _repair = repair;
+            _message = message;
         }
         [HttpGet]
         public List<RepairViewModel> GetRepairList() => _repair.Read(null)?.ToList();
@@ -32,6 +34,10 @@ namespace AbstractShopRestApi.Controllers
         {
             ClientId = clientId 
         });
+        [HttpGet]
+        public List<MessageInfoViewModel> GetMessages(int clientId) => _message.Read(new MessageInfoBindingModel 
+        {
+            ClientId = clientId });
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) => _order.CreateOrder(model);
     }
