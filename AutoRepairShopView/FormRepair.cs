@@ -35,8 +35,7 @@ namespace RepairView
                 {
                     RepairViewModel view = _logic.Read(new RepairBindingModel
                     {
-                        Id =
-                   id.Value
+                        Id = id.Value
                     })?[0];
                     if (view != null)
                     {
@@ -142,14 +141,12 @@ namespace RepairView
             }
             if (string.IsNullOrEmpty(textBoxPrice.Text))
             {
-                MessageBox.Show("Заполните цену", "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show("Заполните цену", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (repairComponents == null || repairComponents.Count == 0)
             {
-                MessageBox.Show("Заполните компоненты", "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show("Заполните компоненты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             try
@@ -162,14 +159,13 @@ namespace RepairView
                     RepairComponents = repairComponents
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
-               MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void ButtonCancel_Click(object sender, EventArgs e)

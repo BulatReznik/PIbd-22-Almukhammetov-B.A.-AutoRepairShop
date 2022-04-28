@@ -14,14 +14,17 @@ namespace RepairFileImplement
         private readonly string ComponentFileName = "Component.xml";
         private readonly string OrderFileName = "Order.xml";
         private readonly string RepairFileName = "Repair.xml";
+        private readonly string WareHouseFileName = "WareHouse.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Repair> Repairs { get; set; }
+        public List<WareHouse> WareHouses { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Repairs = LoadRepairs();
+            WareHouses = LoadWareHouses();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -99,6 +102,35 @@ namespace RepairFileImplement
             }
             return list;
         }
+        private List<WareHouse> LoadWareHouses()
+        {
+            var list = new List<WareHouse>();
+            if (File.Exists(WareHouseFileName))
+            {
+                XDocument xDocument = XDocument.Load(WareHouseFileName);
+
+                var xElements = xDocument.Root.Elements("WareHouse").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    var wareHouseComponents = new Dictionary<int, int>();
+                    foreach (var ingredient in elem.Element("WareHouseComponents").Elements("WareHouseComponent").ToList())
+                    {
+                        wareHouseComponents.Add(Convert.ToInt32(ingredient.Element("Key").Value), Convert.ToInt32(ingredient.Element("Value").Value));
+                    }
+
+                    list.Add(new WareHouse
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        WareHouseName = elem.Element("WareHouseName").Value,
+                        ResponsibleName = elem.Element("ResponsibleName").Value,
+                        DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
+                        WareHouseComponents = wareHouseComponents
+                    });
+                }
+            }
+            return list;
+        }
         private void SaveComponents()
         {
             if (Components != null)
@@ -131,7 +163,7 @@ namespace RepairFileImplement
                         new XElement("DateCreate", order.DateCreate),
                         new XElement("DateImplement", order.DateImplement)
                         ));
-                    XDocument xDocument = new XDocument(xElement);
+                    XDocument xDocument = new(xElement);
                     xDocument.Save(OrderFileName);
                 }
                     
@@ -161,11 +193,41 @@ namespace RepairFileImplement
                 xDocument.Save(RepairFileName);
             }
         }
+        private void SaveWareHouses()
+        {
+            if (WareHouses != null)
+            {
+                var xElement = new XElement("WareHouses");
+
+                foreach (var wareHouse in WareHouses)
+                {
+                    var compElement = new XElement("WareHouseComponents");
+
+                    foreach (var component in wareHouse.WareHouseComponents)
+                    {
+                        compElement.Add(new XElement("WareHouseComponent",
+                        new XElement("Key", component.Key),
+                        new XElement("Value", component.Value)));
+                    }
+
+                    xElement.Add(new XElement("WareHouse",
+                        new XAttribute("Id", wareHouse.Id),
+                        new XElement("WareHouseName", wareHouse.WareHouseName),
+                        new XElement("ResponsibleName", wareHouse.ResponsibleName),
+                        new XElement("DateCreate", wareHouse.DateCreate),
+                        compElement));
+                }
+
+                XDocument xDocument = new(xElement);
+                xDocument.Save(WareHouseFileName);
+            }
+        }
         public static void SaveMethods() 
         {  
             instance.SaveComponents();
             instance.SaveOrders();
             instance.SaveRepairs();
+            instance.SaveWareHouses();
         }
     }
 }

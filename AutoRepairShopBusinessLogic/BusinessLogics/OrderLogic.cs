@@ -13,9 +13,11 @@ namespace RepairBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly IWareHouseStorage _wareHouseStorage;
+        public OrderLogic(IOrderStorage orderStorage, IWareHouseStorage wareHouseStorage)
         {
             _orderStorage = orderStorage;
+            _wareHouseStorage = wareHouseStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -104,6 +106,14 @@ namespace RepairBusinessLogic.BusinessLogics
             if (order.Status != Enum.GetName(typeof(OrderStatus), 0))
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
+            }
+            if (!_wareHouseStorage.CheckWriteOff(new CheckWriteOffBindingModel
+            {
+                RepairId = order.RepairId,
+                Count = order.Count
+            }))
+            {
+                throw new Exception("Компонентов не достаточно");
             }
             _orderStorage.Update(new OrderBindingModel
             {

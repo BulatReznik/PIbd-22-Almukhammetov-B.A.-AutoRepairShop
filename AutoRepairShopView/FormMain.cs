@@ -116,5 +116,16 @@ namespace RepairView
         {
             LoadData();
         }
+        private void СкладыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormWareHouses>();
+            form.ShowDialog();
+        }
+
+        private void ПополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormAddWareHouse>();
+            form.ShowDialog();
+        }
     }
 }
