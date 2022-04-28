@@ -23,6 +23,7 @@ namespace RepairContracts.BusinessLogicsContracts
         /// Сохранение компонент в файл-Word
         /// </summary>
         /// <param name="model"></param>
+        List<ReportOrdersInfoViewModel> GetOrdersGroupByDate();
         void SaveComponentsToWordFile(ReportBindingModel model);
         /// <summary>
         /// Сохранение компонент с указаеним продуктов в файл-Excel
@@ -34,6 +35,10 @@ namespace RepairContracts.BusinessLogicsContracts
         /// </summary>
         /// <param name="model"></param>
         void SaveOrdersToPdfFile(ReportBindingModel model);
+        List<ReportWareHouseComponentViewModel> GetWareHouseComponent();
+        void SaveOrdersInfoToPdfFile(ReportBindingModel model);
+        void SaveWareHousesToWordFile(ReportBindingModel model);
+        void SaveWareHouseComponentToExcelFile(ReportBindingModel model);
 
     }
 }

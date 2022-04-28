@@ -18,14 +18,22 @@ namespace RepairBusinessLogic.OfficePackage.Implements
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static JustificationValues GetJustificationValues(WordJustificationType
-       type)
+        private static JustificationValues GetJustificationValues(WordJustificationType type)
         {
             return type switch
             {
                 WordJustificationType.Both => JustificationValues.Both,
                 WordJustificationType.Center => JustificationValues.Center,
                 _ => JustificationValues.Left,
+            };
+        }
+        private static BorderValues GetBorderValues(WordBorderType type)
+        {
+            return type switch
+            {
+                WordBorderType.Single => BorderValues.Single,
+                WordBorderType.Dashed => BorderValues.Dashed,
+                _ => BorderValues.Hearts
             };
         }
         /// <summary>
@@ -47,8 +55,7 @@ namespace RepairBusinessLogic.OfficePackage.Implements
         /// </summary>
         /// <param name="paragraphProperties"></param>
         /// <returns></returns>
-        private static ParagraphProperties CreateParagraphProperties(WordTextProperties
-       paragraphProperties)
+        private static ParagraphProperties CreateParagraphProperties(WordTextProperties paragraphProperties)
         {
             if (paragraphProperties != null)
             {
@@ -67,11 +74,58 @@ namespace RepairBusinessLogic.OfficePackage.Implements
                 {
                     paragraphMarkRunProperties.AppendChild(new FontSize
                     {
-                        Val =
-                   paragraphProperties.Size
+                        Val = paragraphProperties.Size
                     });
                 }
                 properties.AppendChild(paragraphMarkRunProperties);
+                return properties;
+            }
+            return null;
+        }
+        private static TableProperties CreateTableProperties(WordTableProperties tableProperties)
+        {
+            if (tableProperties != null)
+            {
+                var properties = new TableProperties(
+
+                    new FontSize()
+                    {
+                        Val = tableProperties.TextSize
+                    },
+
+                    new TableBorders(
+                        new TopBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new BottomBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new LeftBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new RightBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new InsideHorizontalBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        },
+                        new InsideVerticalBorder()
+                        {
+                            Val = GetBorderValues(tableProperties.BorderType),
+                            Size = Convert.ToUInt32(tableProperties.BorderSize)
+                        }
+                    )
+                );
                 return properties;
             }
             return null;
@@ -104,12 +158,75 @@ namespace RepairBusinessLogic.OfficePackage.Implements
                     docRun.AppendChild(new Text
                     {
                         Text = run.Item1,
-                        Space =
-                   SpaceProcessingModeValues.Preserve
+                        Space = SpaceProcessingModeValues.Preserve
                     });
                     docParagraph.AppendChild(docRun);
                 }
                 _docBody.AppendChild(docParagraph);
+            }
+        }
+        protected override void CreateTable(WordTable table)
+        {
+
+            if (table != null)
+            {
+                var docTable = new Table();
+
+                docTable.AppendChild(CreateTableProperties(table.TableProperties));
+
+                TableRow rowHeader = new TableRow();
+
+                TableCell cellHeader = new();
+                cellHeader.Append(new TableCellProperties(
+                    new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "7200" },
+                    new HorizontalMerge() { Val = MergedCellValues.Restart }));
+
+                WordTextProperties textProperties = new WordTextProperties()
+                {
+                    JustificationType = WordJustificationType.Center
+                };
+                cellHeader.Append(new Paragraph(new Run(new Text(table.Header))));
+                cellHeader.GetFirstChild<Paragraph>().ParagraphProperties = CreateParagraphProperties(textProperties);
+                TableCell tmpCell1 = new();
+                tmpCell1.Append(new TableCellProperties(
+                    new HorizontalMerge() { Val = MergedCellValues.Continue }));
+                tmpCell1.Append(new Paragraph(new Run(new Text(""))));
+
+                TableCell tmpCell2 = new();
+                tmpCell2.Append(new TableCellProperties(
+                    new HorizontalMerge() { Val = MergedCellValues.Continue }));
+                tmpCell2.Append(new Paragraph(new Run(new Text(""))));
+
+                rowHeader.Append(cellHeader);
+                rowHeader.Append(tmpCell1);
+                rowHeader.Append(tmpCell2);
+                docTable.Append(rowHeader);
+
+                foreach (var row in table.Rows)
+                {
+                    TableCell cellName = new TableCell();
+                    TableCell cellPerson = new TableCell();
+                    TableCell cellDate = new TableCell();
+
+                    TableRow rowData = new TableRow();
+
+                    cellName.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    cellName.Append(new Paragraph(new Run(new Text(row.WareHouseName))));
+                    cellPerson.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    cellPerson.Append(new Paragraph(new Run(new Text(row.ResponsibleName))));
+                    cellDate.Append(new TableCellProperties(
+                        new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = "2400" }));
+                    cellDate.Append(new Paragraph(new Run(new Text(row.DateCreate.ToString()))));
+                    rowData.Append(cellName);
+                    rowData.Append(cellPerson);
+                    rowData.Append(cellDate);
+
+                    docTable.Append(rowData);
+                }
+                _docBody.AppendChild(docTable);
+
             }
         }
         protected override void SaveWord(WordInfo info)

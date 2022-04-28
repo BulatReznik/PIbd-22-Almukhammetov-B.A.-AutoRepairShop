@@ -25,44 +25,87 @@ namespace RepairBusinessLogic.OfficePackage
                 CellToName = "C1"
             });
             uint rowIndex = 2;
-            foreach (var pc in info.RepairComponents)
+            if (info.SheetType == ExcelSheetType.Repair)
             {
-                InsertCellInWorksheet(new ExcelCellParameters
-                {
-                    ColumnName = "A",
-                    RowIndex = rowIndex,
-                    Text = pc.RepairName,
-                    StyleInfo = ExcelStyleInfoType.Text
-                });
-                rowIndex++;
-                foreach (var repair in pc.Components)
+                foreach (var pc in info.RepairComponents)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
-                        ColumnName = "B",
+                        ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = repair.Item1,
-                        StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        Text = pc.RepairName,
+                        StyleInfo = ExcelStyleInfoType.Text
                     });
+                    rowIndex++;
+                    foreach (var repair in pc.Components)
+                    {
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            ColumnName = "B",
+                            RowIndex = rowIndex,
+                            Text = repair.Item1,
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        });
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            ColumnName = "C",
+                            RowIndex = rowIndex,
+                            Text = pc.TotalCount.ToString(),
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder ///////////
+                        });
+                        rowIndex++;
+                    }
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = repair.Item2.ToString(),
-                        StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        Text = pc.TotalCount.ToString(),
+                        StyleInfo = ExcelStyleInfoType.Text
                     });
                     rowIndex++;
                 }
-                InsertCellInWorksheet(new ExcelCellParameters
-                {
-                    ColumnName = "C",
-                    RowIndex = rowIndex,
-                    Text = pc.TotalCount.ToString(),
-                    StyleInfo = ExcelStyleInfoType.Text
-                });
-                rowIndex++;
             }
-            SaveExcel(info);
+            else
+            {
+                foreach (var warehouseComponents in info.WareHouseComponents)
+                {
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        ColumnName = "A",
+                        RowIndex = rowIndex,
+                        Text = warehouseComponents.WareHouseName,
+                        StyleInfo = ExcelStyleInfoType.Text
+                    });
+                    rowIndex++;
+                    foreach (var ingredient in warehouseComponents.Components)
+                    {
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            ColumnName = "B",
+                            RowIndex = rowIndex,
+                            Text = ingredient.Item1,
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        });
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            ColumnName = "C",
+                            RowIndex = rowIndex,
+                            Text = ingredient.Item2.ToString(),
+                            StyleInfo = ExcelStyleInfoType.TextWithBroder
+                        });
+                        rowIndex++;
+                    }
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        ColumnName = "C",
+                        RowIndex = rowIndex,
+                        Text = warehouseComponents.TotalCount.ToString(),
+                        StyleInfo = ExcelStyleInfoType.Text
+                    });
+                    rowIndex++;
+                }
+            }
+            SaveExcel(info);////////////
         }
         /// <summary>
         /// Создание excel-файла

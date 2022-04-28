@@ -153,5 +153,33 @@ namespace RepairView
             var form = Program.Container.Resolve<FormAddWareHouse>();
             form.ShowDialog();
         }
+
+        private void toolStripMenuItemWareHouseList_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    _reportLogic.SaveWareHousesToWordFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void toolStripMenuItemWareHouseIngredients_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportWareHouseComponents>();
+            form.ShowDialog();
+        }
+
+        private void toolStripMenuItemOrdersInfo_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrdersInfo>();
+            form.ShowDialog();
+        }
     }
 }

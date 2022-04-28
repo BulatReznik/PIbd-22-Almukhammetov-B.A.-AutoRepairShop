@@ -1,7 +1,7 @@
-﻿using RepairContracts.ViewModels;
+﻿using RepairBusinessLogic.OfficePackage.HelperEnums;
+using RepairContracts.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RepairBusinessLogic.OfficePackage.HelperModels
 {
@@ -12,5 +12,7 @@ namespace RepairBusinessLogic.OfficePackage.HelperModels
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public List<ReportOrdersViewModel> Orders { get; set; }
+        public List<ReportOrdersInfoViewModel> OrdersInfo { get; set; }
+        public PdfReportType Type { get; set; }
     }
 }
