@@ -32,6 +32,7 @@ namespace RepairView
         [STAThread]
         static void Main()
         {
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -42,16 +43,13 @@ namespace RepairView
             var currentContainer = new UnityContainer();
 
             currentContainer.RegisterType<IComponentStorage, ComponentStorage>(new HierarchicalLifetimeManager());
-
-            currentContainer.RegisterType<IOrderStorage, OrderStorage>(new  HierarchicalLifetimeManager());
-
+            currentContainer.RegisterType<IOrderStorage, OrderStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IRepairStorage, RepairStorage>(new HierarchicalLifetimeManager());
-
             currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new HierarchicalLifetimeManager());
-
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
-
             currentContainer.RegisterType<IRepairLogic, RepairLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWareHouseStorage, WareHouseStorage>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWareHouseLogic, WareHouseLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }
