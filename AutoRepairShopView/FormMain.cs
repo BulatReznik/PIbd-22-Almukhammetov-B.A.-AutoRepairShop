@@ -13,13 +13,15 @@ namespace RepairView
         private readonly IReportLogic _reportLogic;
         private readonly IWorkProcess _workProcess;
         private readonly IImplementerLogic _implementerLogic;
-        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IWorkProcess workProcess, IImplementerLogic implementerLogic)
+        private readonly IBackUpLogic _backUpLogic;
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IWorkProcess workProcess, IImplementerLogic implementerLogic, IBackUpLogic backUpLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
             _workProcess = workProcess;
             _implementerLogic = implementerLogic;
+            _backUpLogic = backUpLogic;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -29,6 +31,8 @@ namespace RepairView
         {
             try
             {
+                Program.ConfigGrid(_orderLogic.Read(null), dataGridView);
+                /*
                 var list = _orderLogic.Read(null);
                 if (list != null)
                 {
@@ -38,6 +42,7 @@ namespace RepairView
                     dataGridView.Columns[2].Visible = false;
                     dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -126,6 +131,27 @@ namespace RepairView
         {
             var form = Program.Container.Resolve<FormReportOrders>();
             form.ShowDialog();
+        }
+        private void СоздатьБекапToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_backUpLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        _backUpLogic.CreateBackUp(new
+                        BackUpSaveBinidngModel
+                        { FolderName = fbd.SelectedPath });
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

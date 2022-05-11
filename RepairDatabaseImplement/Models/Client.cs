@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepairDatabaseImplement.Models
+namespace 
+    
+    RepairDatabaseImplement.Models
 {
     public class Client
     {

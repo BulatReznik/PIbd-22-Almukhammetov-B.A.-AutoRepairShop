@@ -40,11 +40,12 @@ namespace RepairView
             this.компонентыПоРемонтамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ЗапускРаботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
-            this.пToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.создатьБэкапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +56,8 @@ namespace RepairView
             this.справочникиToolStripMenuItem,
             this.отчетыToolStripMenuItem,
             this.ЗапускРаботToolStripMenuItem,
-            this.пToolStripMenuItem});
+            this.пToolStripMenuItem,
+            this.создатьБэкапToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(933, 24);
@@ -139,6 +141,13 @@ namespace RepairView
             this.ЗапускРаботToolStripMenuItem.Text = "Запуск Работ";
             this.ЗапускРаботToolStripMenuItem.Click += new System.EventHandler(this.ЗапускРаботToolStripMenuItem_Click);
             // 
+            // пToolStripMenuItem
+            // 
+            this.пToolStripMenuItem.Name = "пToolStripMenuItem";
+            this.пToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.пToolStripMenuItem.Text = "Почта";
+            this.пToolStripMenuItem.Click += new System.EventHandler(this.ПочтаToolStripMenuItemClick);
+            // 
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -178,12 +187,12 @@ namespace RepairView
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // пToolStripMenuItem
+            // создатьБэкапToolStripMenuItem
             // 
-            this.пToolStripMenuItem.Name = "пToolStripMenuItem";
-            this.пToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.пToolStripMenuItem.Text = "Почта";
-            this.пToolStripMenuItem.Click += new System.EventHandler(this.ПочтаToolStripMenuItemClick);
+            this.создатьБэкапToolStripMenuItem.Name = "создатьБэкапToolStripMenuItem";
+            this.создатьБэкапToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.создатьБэкапToolStripMenuItem.Text = "Создать бэкап";
+            this.создатьБэкапToolStripMenuItem.Click += new System.EventHandler(this.СоздатьБекапToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -225,5 +234,6 @@ namespace RepairView
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ЗапускРаботToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem создатьБэкапToolStripMenuItem;
     }
 }

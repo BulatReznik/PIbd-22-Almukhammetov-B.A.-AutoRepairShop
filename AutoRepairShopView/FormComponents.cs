@@ -29,6 +29,8 @@ namespace RepairView
             {
                 try
                 {
+                    Program.ConfigGrid(_logic.Read(null), dataGridView);
+                    /*
                     var list = _logic.Read(null);
                     if (list != null)
                     {
@@ -36,7 +38,8 @@ namespace RepairView
                         dataGridView.Columns[0].Visible = false;
                         dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     }
-                }
+                    */
+            }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
