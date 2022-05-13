@@ -5,11 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace RepairBusinessLogic.BusinessLogics
 {
@@ -72,10 +69,12 @@ namespace RepairBusinessLogic.BusinessLogics
         {
             var records = _backUpInfo.GetList<T>();
             var obj = new T();
-            var jsonFormatter = new DataContractJsonSerializer(typeof(List<T>));
-            using var fs = new FileStream(string.Format("{0}/{1}.json",
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<T>));
+            //var jsonFormatter = new DataContractJsonSerializer(typeof(List<T>));
+            using var fs = new FileStream(string.Format("{0}/{1}.xml",
             folderName, obj.GetType().Name), FileMode.OpenOrCreate);
-            jsonFormatter.WriteObject(fs, records);
+            //jsonFormatter.WriteObject(fs, records);
+            xmlSerializer.Serialize(fs, records);
         }
     }
 }
