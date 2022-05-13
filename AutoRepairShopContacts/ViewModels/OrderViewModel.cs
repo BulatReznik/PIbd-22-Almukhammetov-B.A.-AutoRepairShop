@@ -10,9 +10,12 @@ namespace RepairContracts.ViewModels
     public class OrderViewModel
     {
         public int? Id { get; set; }
+        public int ClientId { get; set; }
         public int RepairId { get; set; }
         [DisplayName("Ремонт")]
         public string RepairName { get; set; }
+        [DisplayName("Клиент")]
+        public string ClientFIO { get; set; }
         [DisplayName("Количество")]
         public int Count { get; set; }
         [DisplayName("Сумма")]

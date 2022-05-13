@@ -49,6 +49,11 @@ namespace RepairView
             var form = Program.Container.Resolve<FormRepairs>();
             form.ShowDialog();
         }
+        private void КлиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
         private void ButtonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormCreateOrder>();

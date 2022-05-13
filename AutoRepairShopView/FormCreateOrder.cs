@@ -17,11 +17,13 @@ namespace RepairView
     {
         private readonly IRepairLogic _logicR;
         private readonly IOrderLogic _logicO;
-        public FormCreateOrder(IRepairLogic logicP, IOrderLogic logicO)
+        private readonly IClientLogic _logicC;
+        public FormCreateOrder(IRepairLogic logicP, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             _logicR = logicP;
             _logicO = logicO;
+            _logicC = logicC;
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
@@ -34,6 +36,14 @@ namespace RepairView
                     comboBoxRepair.DisplayMember = "RepairName";
                     comboBoxRepair.ValueMember = "Id";
                     comboBoxRepair.SelectedItem = null;
+                }
+                var listClients = _logicC.Read(null);
+                if (listClients != null)
+                {
+                    comboBoxClient.DataSource = listClients;
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.SelectedItem = null;
                 }
             }
             catch (Exception ex)
@@ -82,6 +92,7 @@ namespace RepairView
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     RepairId = Convert.ToInt32(comboBoxRepair.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)

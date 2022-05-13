@@ -44,8 +44,8 @@ namespace RepairBusinessLogic.BusinessLogics
                 Count = model.Count,
                 Sum = model.Sum,
                 Status = OrderStatus.Принят,
-                DateCreate = DateTime.Now
-               
+                DateCreate = DateTime.Now,
+                ClientId = model.ClientId
             });
         }
 
@@ -68,7 +68,8 @@ namespace RepairBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Выдан
+                Status = OrderStatus.Выдан,
+                ClientId = order.ClientId
             });
         }
 
@@ -91,7 +92,8 @@ namespace RepairBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Готов
+                Status = OrderStatus.Готов,
+                ClientId = order.ClientId
             });
         }
 
@@ -123,7 +125,8 @@ namespace RepairBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
+                Status = OrderStatus.Выполняется,
+                ClientId = order.ClientId
             });
         }
     }
