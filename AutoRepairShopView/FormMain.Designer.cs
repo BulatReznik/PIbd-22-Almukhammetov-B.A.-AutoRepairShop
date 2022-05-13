@@ -77,7 +77,7 @@ namespace RepairView
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.компонентToolStripMenuItem,
             this.продуктToolStripMenuItem,
-            this.СкладыToolStripMenuItem});
+            this.СкладыToolStripMenuItem,
             this.продуктToolStripMenuItem,
             this.клиентыToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
@@ -213,7 +213,7 @@ namespace RepairView
             this.списокЗаказовToolStripMenuItem1,
             this.списокСкладовToolStripMenuItem,
             this.компонентыПоСкладамToolStripMenuItem,
-            this.информацияОЗаказахToolStripMenuItem});
+            this.информацияОЗаказахToolStripMenuItem });
             this.отчетыToolStripMenuItem1.Name = "отчетыToolStripMenuItem1";
             this.отчетыToolStripMenuItem1.Size = new System.Drawing.Size(60, 20);
             this.отчетыToolStripMenuItem1.Text = "Отчеты";
@@ -231,6 +231,7 @@ namespace RepairView
             this.расходникиПоРемонтуToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.расходникиПоРемонтуToolStripMenuItem.Text = "Расходники по ремонту";
             this.расходникиПоРемонтуToolStripMenuItem.Click += new System.EventHandler(this.ComponentRepairsToolStripMenuItem_Click);
+
             // 
             // списокЗаказовToolStripMenuItem1
             // 
@@ -282,34 +283,34 @@ namespace RepairView
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
+    }
 
-        #endregion
+    #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Button buttonCreateOrder;
-        private System.Windows.Forms.Button buttonTakeOrderInWork;
-        private System.Windows.Forms.Button buttonOrderReady;
-        private System.Windows.Forms.Button buttonPayOrder;
-        private System.Windows.Forms.Button buttonRef;
-        private System.Windows.Forms.ToolStripMenuItem компонентToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem продуктToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem СкладыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem пополнениеСкладаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem компонентыПоРемонтамToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
-        private ToolStripMenuItem пополнкниеСкладаToolStripMenuItem;
-        private ToolStripMenuItem отчетыToolStripMenuItem1;
-        private ToolStripMenuItem списокРасходниковToolStripMenuItem;
-        private ToolStripMenuItem расходникиПоРемонтуToolStripMenuItem;
-        private ToolStripMenuItem списокЗаказовToolStripMenuItem1;
-        private ToolStripMenuItem списокСкладовToolStripMenuItem;
-        private ToolStripMenuItem компонентыПоСкладамToolStripMenuItem;
-        private ToolStripMenuItem информацияОЗаказахToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
+    private System.Windows.Forms.MenuStrip menuStrip1;
+    private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
+    private System.Windows.Forms.DataGridView dataGridView;
+    private System.Windows.Forms.Button buttonCreateOrder;
+    private System.Windows.Forms.Button buttonTakeOrderInWork;
+    private System.Windows.Forms.Button buttonOrderReady;
+    private System.Windows.Forms.Button buttonPayOrder;
+    private System.Windows.Forms.Button buttonRef;
+    private System.Windows.Forms.ToolStripMenuItem компонентToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem продуктToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem СкладыToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem пополнениеСкладаToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem компонентыПоРемонтамToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
+    private ToolStripMenuItem пополнкниеСкладаToolStripMenuItem;
+    private ToolStripMenuItem отчетыToolStripMenuItem1;
+    private ToolStripMenuItem списокРасходниковToolStripMenuItem;
+    private ToolStripMenuItem расходникиПоРемонтуToolStripMenuItem;
+    private ToolStripMenuItem списокЗаказовToolStripMenuItem1;
+    private ToolStripMenuItem списокСкладовToolStripMenuItem;
+    private ToolStripMenuItem компонентыПоСкладамToolStripMenuItem;
+    private ToolStripMenuItem информацияОЗаказахToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
     }
 }
