@@ -10,8 +10,8 @@ using RepairDatabaseImplement;
 namespace RepairDatabaseImplement.Migrations
 {
     [DbContext(typeof(RepairDatabase))]
-    [Migration("20220426170149_Message")]
-    partial class Message
+    [Migration("20220511120216_8LAB")]
+    partial class _8LAB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

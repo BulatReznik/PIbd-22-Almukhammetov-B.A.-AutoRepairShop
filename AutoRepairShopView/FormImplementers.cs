@@ -79,13 +79,15 @@ namespace RepairView
         {
             try
             {
+                Program.ConfigGrid(logic.Read(null), dataGridViewImplementer);
+                /*
                 var list = logic.Read(null);
                 if (list != null)
                 {
                     dataGridViewImplementer.DataSource = list;
                     dataGridViewImplementer.Columns[0].Visible = false;
                     dataGridViewImplementer.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                }*/
             }
             catch (Exception ex)
             {

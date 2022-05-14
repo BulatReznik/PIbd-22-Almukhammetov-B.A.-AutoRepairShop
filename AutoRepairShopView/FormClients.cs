@@ -28,6 +28,8 @@ namespace RepairView
         {
             try
             {
+                Program.ConfigGrid(_logic.Read(null), dataGridViewClients);
+                /*
                 var list = _logic.Read(null);
                 if (list != null)
                 {
@@ -37,6 +39,7 @@ namespace RepairView
                     dataGridViewClients.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridViewClients.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
+                */
             }
             catch (Exception ex)
             {

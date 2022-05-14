@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepairContracts.Attributes;
+using System;
 using System.ComponentModel;
 
 namespace RepairContracts.ViewModels
@@ -8,14 +9,15 @@ namespace RepairContracts.ViewModels
     /// </summary>
     public class MessageInfoViewModel
     {
+        [Column(title: "Номер", width: 50, visible: false)]
         public string MessageId { get; set; }
-        [DisplayName("Отправитель")]
+        [Column(title: "Отправитель", width: 150)]
         public string SenderName { get; set; }
-        [DisplayName("Дата письма")]
+        [Column(title: "Дата письма", width: 100)]
         public DateTime DateDelivery { get; set; }
-        [DisplayName("Заголовок")]
+        [Column(title: "Заголовок", width: 100)]
         public string Subject { get; set; }
-        [DisplayName("Текст")]
+        [Column(title: "Текст", gridViewAutoSize: GridViewAutoSize.AllCells)]
         public string Body { get; set; }
 
     }

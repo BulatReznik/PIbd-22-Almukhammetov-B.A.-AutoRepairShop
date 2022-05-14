@@ -8,12 +8,17 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using RepairContracts.StorageContracts;
 
 namespace RepairBusinessLogic.MailWorker
 {
     public class MailKitWorker: AbstractMailWorker
     {
-        public MailKitWorker(IMessageInfoLogic messageInfoLogic) : base(messageInfoLogic){}
+        private IClientStorage _clientStorage;
+        public MailKitWorker(IMessageInfoLogic messageInfoLogic, IClientStorage clientStorage) : base(messageInfoLogic)
+        {
+            _clientStorage = clientStorage;
+        }
         protected override async Task SendMailAsync(MailSendInfoBindingModel info)
         {
             using var objMailMessage = new MailMessage();
@@ -54,12 +59,16 @@ namespace RepairBusinessLogic.MailWorker
                         {
                             list.Add(new MessageInfoBindingModel
                             {
+                                ClientId = _clientStorage.GetElement(new ClientBindingModel 
+                                {
+                                    Email = mail.Address
+                                })?.Id,
                                 DateDelivery = message.Date.DateTime,
                                 MessageId = message.MessageId,
                                 FromMailAddress = mail.Address,
                                 Subject = message.Subject,
                                 Body = message.TextBody
-                            });
+                            }) ;
                         }
                     }
                 }

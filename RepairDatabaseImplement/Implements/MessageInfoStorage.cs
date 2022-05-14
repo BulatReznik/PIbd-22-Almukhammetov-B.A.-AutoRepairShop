@@ -60,7 +60,7 @@ namespace RepairDatabaseImplement.Implements
             context.Messages.Add(new MessageInfo
             {
                 MessageId = model.MessageId,
-                ClientId = model.ClientId != null ? model.ClientId : context.Clients.FirstOrDefault(rec => rec.Email == model.FromMailAddress).Id,
+                ClientId = model.ClientId,
                 SenderName = model.FromMailAddress,
                 DateDelivery = model.DateDelivery,
                 Subject = model.Subject,
