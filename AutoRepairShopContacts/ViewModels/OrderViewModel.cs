@@ -8,7 +8,7 @@ namespace RepairContracts.ViewModels
     /// <summary>
     /// Заказ
     /// </summary>
-    public class OrderViewModel ////////////?????
+    public class OrderViewModel
     {
         [Column(title: "Номер", width: 50)]
         public int Id { get; set; }

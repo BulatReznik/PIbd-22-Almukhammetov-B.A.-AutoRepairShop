@@ -47,8 +47,7 @@ namespace RepairBusinessLogic.BusinessLogics
                 foreach (var set in dbsets)
                 {
                     // создаем объект из класса для сохранения
-                    var elem =
-                    assem.CreateInstance(set.PropertyType.GenericTypeArguments[0].FullName);
+                    var elem = assem.CreateInstance(set.PropertyType.GenericTypeArguments[0].FullName);
                     // генерируем метод, исходя из класса
                     MethodInfo generic = method.MakeGenericMethod(elem.GetType());
                     // вызываем метод на выполнение
@@ -71,8 +70,7 @@ namespace RepairBusinessLogic.BusinessLogics
             var obj = new T();
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<T>));
             //var jsonFormatter = new DataContractJsonSerializer(typeof(List<T>));
-            using var fs = new FileStream(string.Format("{0}/{1}.xml",
-            folderName, obj.GetType().Name), FileMode.OpenOrCreate);
+            using var fs = new FileStream(string.Format("{0}/{1}.xml", folderName, obj.GetType().Name), FileMode.OpenOrCreate);
             //jsonFormatter.WriteObject(fs, records);
             xmlSerializer.Serialize(fs, records);
         }

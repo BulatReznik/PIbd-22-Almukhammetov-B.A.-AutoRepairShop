@@ -144,7 +144,7 @@ namespace RepairView
                 var objs = new List<object>();
                 foreach (var conf in config)
                 {
-                    var value = elem.GetType().GetProperty(conf).GetValue(elem); /////////////////////////
+                    var value = elem.GetType().GetProperty(conf).GetValue(elem);
                     objs.Add(value);
                 }
                 grid.Rows.Add(objs.ToArray());
