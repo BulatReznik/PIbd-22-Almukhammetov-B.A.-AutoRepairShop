@@ -18,15 +18,15 @@ namespace RepairContracts.ViewModels
 
         public string GetStringComponents() ////////ДОБАВИЛ
         {
-            string stringIngredients = string.Empty;
+            string stringComponents = string.Empty;
             foreach (var ingr in WareHouseComponents)
             {
-                stringIngredients += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2 + ", ";
+                stringComponents += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2 + ", ";
             }
-            if (stringIngredients.Length != 0)
-                return stringIngredients[0..^2];
+            if (stringComponents.Length != 0)
+                return stringComponents[0..^2];
             else
-                return stringIngredients;
+                return stringComponents;
         }
 
     }

@@ -1,20 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using RepairBusinessLogic.BusinessLogics;
-using RepairContracts.BusinessLogicsContracts;
 using RepairContracts.StorageContracts;
 using RepairDatabaseImplement.Implements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using RepairContracts.BusinessLogicsContracts;
+using RepairBusinessLogic.BusinessLogics;
 
 namespace RepairRestApi
 {
@@ -33,11 +26,15 @@ namespace RepairRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<IRepairStorage, RepairStorage>();
+            services.AddTransient<IWareHouseStorage, WareHouseStorage>();
+            services.AddTransient<IComponentStorage, ComponentStorage>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IRepairLogic, RepairLogic>();
+            services.AddTransient<IWareHouseLogic, WareHouseLogic>();
+            services.AddTransient<IComponentLogic, ComponentLogic>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(); //TODO
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RepairRestApi", Version = "v1" });

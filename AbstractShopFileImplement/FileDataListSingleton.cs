@@ -122,7 +122,6 @@ namespace RepairFileImplement
                     {
                         wareHouseComponents.Add(Convert.ToInt32(ingredient.Element("Key").Value), Convert.ToInt32(ingredient.Element("Value").Value));
                     }
-
                     list.Add(new WareHouse
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
