@@ -4,6 +4,8 @@ using RepairContracts.BusinessLogicsContracts;
 using RepairContracts.StorageContracts;
 using RepairBusinessLogic.BusinessLogics;
 using RepairDatabaseImplement.Implements;
+using RepairBusinessLogic.OfficePackage.Implements;
+using RepairBusinessLogic.OfficePackage;
 using Unity;
 using Unity.Lifetime;
 
@@ -48,6 +50,14 @@ namespace RepairView
             currentContainer.RegisterType<IRepairLogic, RepairLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWareHouseStorage, WareHouseStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IWareHouseLogic, WareHouseLogic>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

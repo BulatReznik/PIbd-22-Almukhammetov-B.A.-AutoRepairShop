@@ -218,9 +218,6 @@ namespace RepairView
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Сolumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Сolumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Сolumn3;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;

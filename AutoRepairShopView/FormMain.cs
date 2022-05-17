@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using RepairBusinessLogic.BusinessLogics;
 using RepairContracts.BindingModels;
 using RepairContracts.BusinessLogicsContracts;
 using Unity;
@@ -9,10 +10,12 @@ namespace RepairView
     public partial class FormMain : Form
     {
         private readonly IOrderLogic _orderLogic;
-        public FormMain(IOrderLogic orderLogic)
+        private readonly IReportLogic _reportLogic;
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
+            _reportLogic = reportLogic;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -116,6 +119,29 @@ namespace RepairView
         {
             LoadData();
         }
+        private void ComponentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _reportLogic.SaveComponentsToWordFile(new ReportBindingModel
+                {
+                    FileName = dialog.FileName
+                });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            }
+        }
+        private void ComponentRepairsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportRepairComponents>();
+            form.ShowDialog();
+        }
+        private void OrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
         private void СкладыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormWareHouses>();
@@ -125,6 +151,34 @@ namespace RepairView
         private void ПополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormAddWareHouse>();
+            form.ShowDialog();
+        }
+
+        private void toolStripMenuItemWareHouseList_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    _reportLogic.SaveWareHousesToWordFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void toolStripMenuItemWareHouseIngredients_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportWareHouseComponents>();
+            form.ShowDialog();
+        }
+
+        private void toolStripMenuItemOrdersInfo_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrdersInfo>();
             form.ShowDialog();
         }
     }

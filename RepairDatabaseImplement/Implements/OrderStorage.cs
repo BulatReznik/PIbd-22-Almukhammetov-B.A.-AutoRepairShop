@@ -33,7 +33,7 @@ namespace RepairDatabaseImplement.Implements
                 return null;
             }
             using var context = new RepairDatabase();
-            return context.Orders.Include(rec => rec.Repair).Where(rec => rec.RepairId == model.RepairId).Select(rec => new OrderViewModel
+            return context.Orders.Include(rec => rec.Repair).Where(rec => rec.RepairId == model.RepairId || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo).Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
                 RepairId = rec.RepairId,

@@ -9,7 +9,7 @@ namespace RepairDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false) 
             {
-                optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-UJ3H26AC\SQLEXPRESS;Initial Catalog=RepairDatabase;Integrated Security=True; MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-UJ3H26AC\SQLEXPRESS;Initial Catalog=RepairDatabaseHard4;Integrated Security=True; MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
