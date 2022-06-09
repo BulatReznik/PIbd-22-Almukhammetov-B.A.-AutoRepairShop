@@ -91,7 +91,7 @@ namespace RepairWareHouseApp.Controllers
             {
                 return;
             }
-            WareHouseViewModel wareHouse = APIClient.GetRequest<WareHouseViewModel>($"api/Warehouse/getwareHouse?wareHouseId={wareHouseId}");
+            WareHouseViewModel wareHouse = APIClient.GetRequest<WareHouseViewModel>($"api/WareHouse/getwareHouse?wareHouseId={wareHouseId}");
             APIClient.PostRequest("api/wareHouse/createupdatewareHouse", new WareHouseBindingModel
             {
                 Id = wareHouseId,

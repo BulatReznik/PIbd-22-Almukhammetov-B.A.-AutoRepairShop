@@ -33,8 +33,7 @@ namespace RepairRestApi
             services.AddTransient<IRepairLogic, RepairLogic>();
             services.AddTransient<IWareHouseLogic, WareHouseLogic>();
             services.AddTransient<IComponentLogic, ComponentLogic>();
-
-            services.AddControllers().AddNewtonsoftJson(); //TODO
+            services.AddControllers().AddNewtonsoftJson(); 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RepairRestApi", Version = "v1" });

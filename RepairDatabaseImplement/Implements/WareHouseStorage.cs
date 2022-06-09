@@ -65,11 +65,11 @@ namespace RepairDatabaseImplement.Implements
                 return null;
             }
             using var context = new RepairDatabase();
-            var warehouse = context.WareHouses
+            var wareHouse = context.WareHouses
             .Include(rec => rec.WareHouseComponents)
             .ThenInclude(rec => rec.Component)
             .FirstOrDefault(rec => rec.WareHouseName == model.WareHouseName ||rec.Id == model.Id);
-            return warehouse != null ? CreateModel(warehouse) : null;
+            return wareHouse != null ? CreateModel(wareHouse) : null;
         }
 
         public List<WareHouseViewModel> GetFilteredList(WareHouseBindingModel model)
@@ -105,15 +105,15 @@ namespace RepairDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                WareHouse warehouse = new WareHouse()
+                WareHouse wareHouse = new WareHouse()
                 {
                     WareHouseName = model.WareHouseName,
                     ResponsibleName = model.ResponsibleName,
                     DateCreate = model.DateCreate
                 };
-                context.WareHouses.Add(warehouse);
+                context.WareHouses.Add(wareHouse);
                 context.SaveChanges();
-                CreateModel(model, warehouse, context);
+                CreateModel(model, wareHouse, context);
                 transaction.Commit();
             }
             catch
@@ -144,15 +144,15 @@ namespace RepairDatabaseImplement.Implements
                 throw;
             }
         }
-        private static WareHouseViewModel CreateModel(WareHouse warehouse)
+        private static WareHouseViewModel CreateModel(WareHouse wareHouse)
         {
             return new WareHouseViewModel
             {
-                Id = warehouse.Id,
-                WareHouseName = warehouse.WareHouseName,
-                ResponsibleName = warehouse.ResponsibleName,
-                DateCreate = warehouse.DateCreate,
-                WareHouseComponents = warehouse.WareHouseComponents
+                Id = wareHouse.Id,
+                WareHouseName = wareHouse.WareHouseName,
+                ResponsibleName = wareHouse.ResponsibleName,
+                DateCreate = wareHouse.DateCreate,
+                WareHouseComponents = wareHouse.WareHouseComponents
             .ToDictionary(recII => recII.ComponentId, recII => (recII.Component?.ComponentName, recII.Count))
             };
         }
@@ -165,13 +165,13 @@ namespace RepairDatabaseImplement.Implements
             wareHouse.DateCreate = model.DateCreate;
             if (model.Id.HasValue)
             {
-                var warehouseIngredients = context.WareHouseComponents.Where(rec =>
+                var wareHouseIngredients = context.WareHouseComponents.Where(rec =>
                 rec.WareHouseId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.WareHouseComponents.RemoveRange(warehouseIngredients.Where(rec => !model.WareHouseComponents.ContainsKey(rec.ComponentId)).ToList());
+                context.WareHouseComponents.RemoveRange(wareHouseIngredients.Where(rec => !model.WareHouseComponents.ContainsKey(rec.ComponentId)).ToList());
                 context.SaveChanges();
                 // обновили количество у существующих записей
-                foreach (var updateIngredient in warehouseIngredients)
+                foreach (var updateIngredient in wareHouseIngredients)
                 {
                     updateIngredient.Count = model.WareHouseComponents[updateIngredient.ComponentId].Item2;
                     model.WareHouseComponents.Remove(updateIngredient.ComponentId);

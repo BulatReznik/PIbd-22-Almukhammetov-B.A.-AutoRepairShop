@@ -1,71 +1,71 @@
 ﻿@using RepairContracts.ViewModels
 @model List<WareHouseViewModel>
-@{ 
-    ViewData["Title"] = "Home Page1"; 
-    }
+@{
+    ViewData["Title"] = "Home Page";
+}
 
 <div class="text-center">
     <h1 class="display-4">Склады</h1>
 </div>
 <div class="text-center">
-    @{ 
+    @{
         if (Model == null)
-                    {
-        <h3 class="display-4">Авторизируйтесь</h3> 
-        return;
-                    }
+        {
+            <h3 class="display-4">Авторизируйтесь</h3>
+            return;
+        }
         <div class="row justify-content-center">
             <p>
                 <a class="col-lg-auto" asp-action="Create">Создать склад</a>
             </p>
         </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Склад
-                                </th>
-                                <th>
-                                    ФИО ответственного
-                                </th>
-                                <th>
-                                    Дата создания
-                                </th>
-                                <th>
-                                    Компоненты
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.WareHouseName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ResponsibleName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DateCreate)
-                                </td>
-                                <td>
-                                    @{ var stringComponents = item.GetStringComponents(); }
-                                    @Html.DisplayFor(modelItem => stringComponents)
-                                </td>
-                                <td>
-                                    <a asp-action="Change" asp-route-wareHouseId="@item.Id"
-                                       asp-route-wareHouseName="@item.WareHouseName" responsibleName="@item.ResponsibleName">Изменить</a>
-                                </td>
-                         <td>
-                            <a asp-action="Delete" asp-route-wareHouseId="@item.Id">Удалить</a>
-                    </td>
-                    <td>
-                            <a asp-action="Replenish" asp-route-wareHouseId="@item.Id">Пополнить</a>
-                    </td>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Склад
+                    </th>
+                    <th>
+                        ФИО ответственного
+                    </th>
+                    <th>
+                        Дата создания
+                    </th>
+                    <th>
+                        Компоненты
+                    </th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WareHouseName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResponsibleName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreate)
+                        </td>
+                        <td>
+                            @{ var stringComponents = item.GetStringComponents(); }
+                            @Html.DisplayFor(modelItem => stringComponents)
+                        </td>
+                        <td>
+                            <a asp-action="Change" asp-route-wareHouseId="@item.Id"
+                               asp-route-wareHouseName="@item.WareHouseName" responsibleName="@item.ResponsibleName">Изменить</a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-wareHouseId="@item.Id">Удалить</a>
+                        </td>
+                        <td>
+                            <a asp-action="Replenish" asp-route-wareHouseId="@item.Id">Пополнить</a>
+                        </td>
+                    </tr>
                 }
             </tbody>
-        </table> 
+        </table>
     }
 </div>

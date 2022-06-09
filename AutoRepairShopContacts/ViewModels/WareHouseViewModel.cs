@@ -16,7 +16,7 @@ namespace RepairContracts.ViewModels
         public DateTime DateCreate { get; set; }
         public Dictionary<int, (string, int)> WareHouseComponents { get; set; }
 
-        public string GetStringComponents() ////////ДОБАВИЛ
+        public string GetStringComponents()
         {
             string stringComponents = string.Empty;
             foreach (var ingr in WareHouseComponents)
