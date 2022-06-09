@@ -24,7 +24,10 @@ namespace RepairBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                return new List<RepairViewModel> { _repairStorage.GetElement(model) };
+                return new List<RepairViewModel> 
+                {
+                    _repairStorage.GetElement(model) 
+                };
             }
             return _repairStorage.GetFilteredList(model);
         }

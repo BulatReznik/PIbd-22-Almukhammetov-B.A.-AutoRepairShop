@@ -34,8 +34,10 @@ namespace RepairListImplement.Implements
             foreach (var order in source.Orders)
             {
                 if (order.RepairId == model.RepairId || (model.DateFrom.HasValue && model.DateTo.HasValue &&
-                    order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
-                    || model.ClientId.HasValue && order.ClientId == model.ClientId.Value)
+                    order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)||
+                    (model.ClientId.HasValue && order.ClientId == model.ClientId.Value)||
+                    (model.SearchStatus.HasValue && model.SearchStatus.Value == order.Status)||
+                    (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && model.Status == order.Status))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -107,6 +109,7 @@ namespace RepairListImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
         private OrderViewModel CreateModel(Order order)
@@ -129,6 +132,15 @@ namespace RepairListImplement.Implements
                     break;
                 }
             }
+            string implementerFIO = string.Empty;
+            foreach (var implementer in source.Implementers)
+            {
+                if (implementer.Id == order.ImplementerId)
+                {
+                    implementerFIO = implementer.ImplementerFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -140,7 +152,9 @@ namespace RepairListImplement.Implements
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 ClientId = order.ClientId,
-                ClientFIO = clientFIO
+                ClientFIO = clientFIO,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementerFIO
             };
         }
     }
