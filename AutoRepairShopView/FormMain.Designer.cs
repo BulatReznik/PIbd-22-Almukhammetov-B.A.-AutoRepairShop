@@ -64,8 +64,7 @@ namespace RepairView
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
-            this.отчетыToolStripMenuItem,
-            this.ЗапускРаботToolStripMenuItem});
+            this.ЗапускРаботToolStripMenuItem,
             this.пополнкниеСкладаToolStripMenuItem,
             this.отчетыToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -80,8 +79,6 @@ namespace RepairView
             this.компонентToolStripMenuItem,
             this.продуктToolStripMenuItem,
             this.СкладыToolStripMenuItem,
-            this.продуктToolStripMenuItem,
-            this.клиентыToolStripMenuItem});
             this.клиентыToolStripMenuItem,
             this.исполнителиToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
@@ -311,20 +308,7 @@ namespace RepairView
     private ToolStripMenuItem компонентыПоСкладамToolStripMenuItem;
     private ToolStripMenuItem информацияОЗаказахToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Button buttonCreateOrder;
-        private System.Windows.Forms.Button buttonOrderReady;
-        private System.Windows.Forms.Button buttonRef;
-        private System.Windows.Forms.ToolStripMenuItem компонентToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem продуктToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem компонентыПоРемонтамToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ЗапускРаботToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem ЗапускРаботToolStripMenuItem;
     }
 }
