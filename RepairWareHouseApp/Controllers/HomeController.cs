@@ -80,8 +80,7 @@ namespace RepairWareHouseApp.Controllers
         [HttpGet]
         public IActionResult Change(int wareHouseId)
         {
-            ViewBag.WareHouse =
-            APIClient.GetRequest<WareHouseViewModel>($"api/wareHouse/getwareHouse?wareHouseId={wareHouseId}");
+            ViewBag.WareHouse = APIClient.GetRequest<WareHouseViewModel>($"api/wareHouse/getwareHouse?wareHouseId={wareHouseId}");
             return View();
         }
         [HttpPost]

@@ -87,7 +87,10 @@ namespace RepairBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
-
+            if(order.Status == Enum.GetName(typeof(OrderStatus), 4))
+            {
+                return;
+            }
             if (order.Status != Enum.GetName(typeof(OrderStatus), 1))
             {
                 throw new Exception("Заказ не в статусе \"Выполняется\"");

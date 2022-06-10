@@ -57,22 +57,25 @@ namespace RepairBusinessLogic.BusinessLogics
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
             }
+            ///////////////////////////////////////////////////////////////////////////////
+            
             //проверка на наличие недостающих материалов
             var requireComponents = await Task.Run(() => _orderLogic.Read(new OrderBindingModel
             {
                 ImplementerId = implementer.Id,
                 Status = OrderStatus.Требуются_материалы
             }));
+
             foreach (var order in requireComponents)
             {
                 // пытаемся назначить заказ на исполнителя
-                _orderLogic.TakeOrderInWork(new
-                ChangeStatusBindingModel
-                { OrderId = order.Id, ImplementerId = implementer.Id });
+                _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = order.Id, ImplementerId = implementer.Id });
+
                 if (order.Status.Equals(Enum.GetName(typeof(OrderStatus), 4)))
                 {
                     continue;
                 }
+
                 // делаем работу
                 Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                 _orderLogic.FinishOrder(new ChangeStatusBindingModel
@@ -80,10 +83,12 @@ namespace RepairBusinessLogic.BusinessLogics
                     OrderId = order.Id,
                     ImplementerId = implementer.Id
                 });
+
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
             }
 
+            ////////////////////////////////////////////////////////////////////////////////////
             await Task.Run(() =>
             {
                 while (!orders.IsEmpty)
