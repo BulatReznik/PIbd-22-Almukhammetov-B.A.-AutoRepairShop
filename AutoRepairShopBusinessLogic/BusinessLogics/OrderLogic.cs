@@ -51,7 +51,10 @@ namespace RepairBusinessLogic.BusinessLogics
 
         public void DeliveryOrder(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            {
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
@@ -69,16 +72,24 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Выдан,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId
             });
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            {
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
+            }
+            if(order.Status == Enum.GetName(typeof(OrderStatus), 4))
+            {
+                return;
             }
             if (order.Status != Enum.GetName(typeof(OrderStatus), 1))
             {
@@ -93,30 +104,37 @@ namespace RepairBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов,
-                ClientId = order.ClientId
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId
             });
         }
 
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel 
+            { 
+                Id = model.OrderId 
+            });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
             }
-            if (order.Status != Enum.GetName(typeof(OrderStatus), 0))
+            if (order.Status != Enum.GetName(typeof(OrderStatus), 0) && !order.Status.Equals(Enum.GetName(typeof(OrderStatus), 4)))
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            if (!_wareHouseStorage.CheckWriteOff(new CheckWriteOffBindingModel // TODO: МБИ НАДО БУДЕТ ДОДЕЛАТЬ
+            if (!_wareHouseStorage.CheckWriteOff(new CheckWriteOffBindingModel 
             {
                 RepairId = order.RepairId,
                 Count = order.Count
-            }))
-            {
-                throw new Exception("Компонентов не достаточно");
             }
+            ))
+            {
+                order.Status = Enum.GetName(OrderStatus.Требуются_материалы);
+            }
+            else order.Status = Enum.GetName(OrderStatus.Выполняется);
+
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
@@ -125,8 +143,9 @@ namespace RepairBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется,
-                ClientId = order.ClientId
+                Status = Enum.Parse<OrderStatus>(order.Status),
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId,
             });
         }
     }

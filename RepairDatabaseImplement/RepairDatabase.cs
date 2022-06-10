@@ -9,7 +9,7 @@ namespace RepairDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false) 
             {
-                optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-UJ3H26AC\SQLEXPRESS;Initial Catalog=RepairDatabaseHard5;Integrated Security=True; MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-UJ3H26AC\SQLEXPRESS;Initial Catalog=RepairDatabaseHard6;Integrated Security=True; MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -20,5 +20,6 @@ namespace RepairDatabaseImplement
         public virtual DbSet<Client> Clients { set; get; }
         public virtual DbSet<WareHouse> WareHouses { get; set; }
         public virtual DbSet<WareHouseComponent> WareHouseComponents { get; set; }
+        public virtual DbSet<Implementer> Implementers { set; get; }
     }
 }

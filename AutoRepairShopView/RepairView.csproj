@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove=".resx" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.16.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.14">
       <PrivateAssets>all</PrivateAssets>

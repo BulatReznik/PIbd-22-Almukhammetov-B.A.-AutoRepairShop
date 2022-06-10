@@ -29,7 +29,6 @@ namespace RepairRestApi.Controllers
         [HttpPost]
         public void DeleteWareHouse(WareHouseBindingModel model) => _wareHouseLogic.Delete(model);
         [HttpPost]
-        public void ReplenishWareHouse(ReplenishBindingModel model) =>
-           _wareHouseLogic.AddComponent(new WareHouseBindingModel { Id = model.WareHouseId }, model.ComponentId, model.Count);
+        public void ReplenishWareHouse(ReplenishBindingModel model) => _wareHouseLogic.AddComponent(new WareHouseBindingModel { Id = model.WareHouseId }, model.ComponentId, model.Count);
     }
 }
