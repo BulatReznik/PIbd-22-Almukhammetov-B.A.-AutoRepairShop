@@ -67,17 +67,17 @@ namespace RepairBusinessLogic.OfficePackage
             }
             else
             {
-                foreach (var warehouseComponents in info.WareHouseComponents)
+                foreach (var wareHouseComponents in info.WareHouseComponents)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = warehouseComponents.WareHouseName,
+                        Text = wareHouseComponents.WareHouseName,
                         StyleInfo = ExcelStyleInfoType.Text
                     });
                     rowIndex++;
-                    foreach (var ingredient in warehouseComponents.Components)
+                    foreach (var ingredient in wareHouseComponents.Components)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
@@ -99,7 +99,7 @@ namespace RepairBusinessLogic.OfficePackage
                     {
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = warehouseComponents.TotalCount.ToString(),
+                        Text = wareHouseComponents.TotalCount.ToString(),
                         StyleInfo = ExcelStyleInfoType.Text
                     });
                     rowIndex++;

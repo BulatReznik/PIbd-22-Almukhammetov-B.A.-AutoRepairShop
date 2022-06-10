@@ -15,5 +15,19 @@ namespace RepairContracts.ViewModels
         [DisplayName("Дата создания склада")]
         public DateTime DateCreate { get; set; }
         public Dictionary<int, (string, int)> WareHouseComponents { get; set; }
+
+        public string GetStringComponents()
+        {
+            string stringComponents = string.Empty;
+            foreach (var ingr in WareHouseComponents)
+            {
+                stringComponents += ingr.Key + ") " + ingr.Value.Item1 + ": " + ingr.Value.Item2 + ", ";
+            }
+            if (stringComponents.Length != 0)
+                return stringComponents[0..^2];
+            else
+                return stringComponents;
+        }
+
     }
 }
